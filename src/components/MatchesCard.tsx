@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatearFecha } from '@/lib/utils'
+import { cn, formatearFecha } from '@/lib/utils'
 import { Match } from '@/lib/types/match'
 import {
   Table,
@@ -43,9 +43,18 @@ export default function MatchesCard({
         </TableHeader>
         <TableBody>
           {matches.map((match: Match) => {
-            if (match.status === 'TIMED' || match.status === 'FINISHED')
+            if (
+              match.status === 'TIMED' ||
+              match.status === 'FINISHED' ||
+              match.status === 'IN_PLAY'
+            )
               return (
-                <TableRow key={match.id}>
+                <TableRow
+                  key={match.id}
+                  className={cn(
+                    match.status === 'IN_PLAY' && 'bg-green-500'
+                  )}
+                >
                   <TableCell className="flex items-start justify-start gap-x-3">
                     <Image
                       src={match.homeTeam.crest}
@@ -56,7 +65,8 @@ export default function MatchesCard({
                     <p>{match.homeTeam.shortName}</p>
                   </TableCell>
                   <TableCell className="text-center">
-                    {match.status !== 'FINISHED'
+                    {match.status !== 'FINISHED' &&
+                    match.status !== 'IN_PLAY'
                       ? formatearFecha(match.utcDate)
                           .split(' ')
                           .map((element) => (
