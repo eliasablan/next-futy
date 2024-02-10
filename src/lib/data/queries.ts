@@ -21,6 +21,7 @@ export const fetchCompetitionStandings = async (code: string) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
