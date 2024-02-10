@@ -1,9 +1,9 @@
-import Image from 'next/image'
+// import Image from 'next/image'
 
 export default async function Home() {
   return (
     <>
-      <section className="flex w-full flex-col px-6 md:flex-row md:items-center md:justify-between">
+      {/* <section className="flex w-full flex-col px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-3xl font-medium text-gray-800">Dashboard</h2>
           <p className="mt-2 text-sm text-gray-500">
@@ -19,11 +19,11 @@ export default async function Home() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                 ></path>
               </svg>
@@ -40,11 +40,11 @@ export default async function Home() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 ></path>
               </svg>
@@ -71,13 +71,13 @@ export default async function Home() {
                 cy="35"
                 r="35"
                 fill="#713BDB"
-                fill-opacity="0.05"
+                fillOpacity="0.05"
               ></circle>
               <path
                 d="M26 44C26 40.625 30.5 40.625 32.75 38.375C33.875 37.25 30.5 37.25 30.5 31.625C30.5 27.8754 31.9996 26 35 26C38.0004 26 39.5 27.8754 39.5 31.625C39.5 37.25 36.125 37.25 37.25 38.375C39.5 40.625 44 40.625 44 44"
                 stroke="#6F52ED"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
             </svg>
             <div className="mx-2">
@@ -101,35 +101,35 @@ export default async function Home() {
                 cy="35"
                 r="35"
                 fill="#33D69F"
-                fill-opacity="0.07"
+                fillOpacity="0.07"
               ></circle>
               <path
                 d="M26 39L31 34"
                 stroke="#21B8C7"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M32 34C32.5523 34 33 33.5523 33 33C33 32.4477 32.5523 32 32 32C31.4477 32 31 32.4477 31 33C31 33.5523 31.4477 34 32 34Z"
                 stroke="#21B8C7"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M37 39C37.5523 39 38 38.5523 38 38C38 37.4477 37.5523 37 37 37C36.4477 37 36 37.4477 36 38C36 38.5523 36.4477 39 37 39Z"
                 stroke="#21B8C7"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M38 37L44 31M33 34L36 37L33 34Z"
                 stroke="#21B8C7"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
             </svg>
             <div className="mx-2">
@@ -153,25 +153,25 @@ export default async function Home() {
                 cy="35"
                 r="35"
                 fill="#FF4C61"
-                fill-opacity="0.05"
+                fillOpacity="0.05"
               ></circle>
               <path
                 d="M26 32L32 38L36 34L43.405 41.405"
                 stroke="#FF4C61"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
               <path
                 d="M43.405 41.405L44 42"
                 stroke="#FF4C61"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               ></path>
               <path
                 d="M44 39V42H41"
                 stroke="#FF4C61"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
             </svg>
             <div className="mx-2">
@@ -199,19 +199,19 @@ export default async function Home() {
                 cy="35"
                 r="35"
                 fill="#4CB8FF"
-                fill-opacity="0.07"
+                fillOpacity="0.07"
               ></circle>
               <path
                 d="M42 26V44H31C30.2044 44 29.4413 43.6839 28.8787 43.1213C28.3161 42.5587 28 41.7956 28 41V29C28 28.2044 28.3161 27.4413 28.8787 26.8787C29.4413 26.3161 30.2044 26 31 26H42Z"
                 stroke="#4CB8FF"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
               <path
                 d="M28 41C28 40.2044 28.3161 39.4413 28.8787 38.8787C29.4413 38.3161 30.2044 38 31 38H42"
                 stroke="#4CB8FF"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
             </svg>
             <div className="mx-2">
@@ -269,9 +269,9 @@ export default async function Home() {
                 fill="currentColor"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
@@ -422,28 +422,28 @@ export default async function Home() {
                 cy="35"
                 r="35"
                 fill="#FFB800"
-                fill-opacity="0.07"
+                fillOpacity="0.07"
               ></circle>
               <path
                 d="M30 44H40M29 25H41V34C41 37.3137 38.3137 40 35 40C31.6863 40 29 37.3137 29 34V25Z"
                 stroke="#FFB800"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M35 40V44"
                 stroke="#FFB800"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M29 28V34H28C26.3431 34 25 32.6569 25 31C25 29.3431 26.3431 28 28 28H29ZM41 34V28H42C43.6569 28 45 29.3431 45 31C45 32.6569 43.6569 34 42 34H41Z"
                 stroke="#FFB800"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
             </svg>
             <div className="mx-2">
@@ -467,19 +467,19 @@ export default async function Home() {
                 cy="35"
                 r="35"
                 fill="#4CB8FF"
-                fill-opacity="0.07"
+                fillOpacity="0.07"
               ></circle>
               <path
                 d="M35 45C40.5228 45 45 40.5228 45 35C45 29.4772 40.5228 25 35 25C29.4772 25 25 29.4772 25 35C25 40.5228 29.4772 45 35 45Z"
                 stroke="#4CB8FF"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
               <path
                 d="M35 28V35L39 39"
                 stroke="#4CB8FF"
-                stroke-width="2"
-                stroke-linecap="square"
+                strokeWidth="2"
+                strokeLinecap="square"
               ></path>
             </svg>
             <div className="mx-2">
@@ -490,7 +490,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }
