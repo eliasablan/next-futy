@@ -65,7 +65,6 @@ export default function StandingsCard({
       </div>
     )
   }
-  // console.log(standings[0].table[0])
   if (type == 'CUP') {
     return (
       <>

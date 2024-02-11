@@ -1,18 +1,28 @@
-import React from 'react'
+'use client'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 
 import { SidebarLeagueLink } from './SidebarLeagueLink'
 
 import { League } from '@/lib/types/league'
+import { MenuContext } from '@/lib/MenuProvider'
+import { cn } from '@/lib/utils'
 
 interface SidebarProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string
   leagues: League[]
 }
 
-export async function Sidebar({ leagues }: SidebarProps) {
+export function Sidebar({ leagues }: SidebarProps) {
+  const { mobileMenuOpen } = useContext(MenuContext)
+
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 flex min-h-screen w-[4.5rem] -translate-x-full transform flex-col space-y-6 overflow-y-auto bg-gray-200 text-gray-100 transition duration-200 ease-out lg:relative lg:inset-0 lg:translate-x-0">
+    <aside
+      className={cn(
+        'fixed inset-y-0 left-0 z-30 flex min-h-screen w-[4.5rem] transform flex-col space-y-6 overflow-y-auto bg-gray-200 text-gray-100 transition duration-200 ease-out lg:relative lg:inset-0 lg:translate-x-0',
+        !mobileMenuOpen && '-translate-x-full'
+      )}
+    >
       <div className="flex flex-1 flex-col items-center space-y-6">
         <Link
           href="/"
@@ -74,35 +84,4 @@ export async function Sidebar({ leagues }: SidebarProps) {
       </div>
     </aside>
   )
-  // return (
-  //   <div className={cn('max-w-72 border-r', className)}>
-  //     <div className="px-3 py-6">
-  //       <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-  //         Leagues
-  //       </h2>
-  //       <div className="space-y-1">
-  //         {leagues &&
-  //           leagues.map((league) => (
-  //             <Button
-  //               key={league.id}
-  //               variant="ghost"
-  //               className="w-full justify-start"
-  //               asChild
-  //             >
-  //               <Link href="">
-  //                 <Image
-  //                   src={league.emblem}
-  //                   alt={league.name}
-  //                   width={24}
-  //                   height={24}
-  //                   className="mr-2"
-  //                 />
-  //                 {league.name}
-  //               </Link>
-  //             </Button>
-  //           ))}
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
 }

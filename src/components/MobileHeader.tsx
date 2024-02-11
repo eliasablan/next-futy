@@ -1,7 +1,10 @@
-import React from 'react'
+'use client'
+import React, { useContext } from 'react'
 import Link from 'next/link'
+import { MenuContext } from '@/lib/MenuProvider'
 
 export function MobileHeader() {
+  const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
   return (
     <header className="bg-gray-800 text-gray-100 lg:hidden">
       <div className="container mx-auto flex items-center justify-between p-4">
@@ -21,7 +24,10 @@ export function MobileHeader() {
             ></path>
           </svg>
         </Link>
-        <button className="rounded-lg p-2 text-white hover:bg-gray-700 focus:outline-none">
+        <button
+          className="rounded-lg p-2 text-white hover:bg-gray-700 focus:outline-none"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
