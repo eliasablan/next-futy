@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 
 import { MobileHeader } from '@/components/MobileHeader'
 import { Sidebar } from '@/components/Sidebar'
-import { MenuProvider } from '@/lib/MenuProvider'
+import { MenuProvider } from '@/components/MenuProvider'
 
 import { fetchLeagues } from '@/lib/data/queries'
 import { League } from '@/lib/types/league'

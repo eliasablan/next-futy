@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { SidebarLeagueLink } from './SidebarLeagueLink'
 
 import { League } from '@/lib/types/league'
-import { MenuContext } from '@/lib/MenuProvider'
+import { MenuContext } from '@/components/MenuProvider'
 import { cn } from '@/lib/utils'
 
 interface SidebarProps extends React.ComponentPropsWithoutRef<'div'> {

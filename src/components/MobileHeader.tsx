@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext } from 'react'
 import Link from 'next/link'
-import { MenuContext } from '@/lib/MenuProvider'
+import { MenuContext } from '@/components/MenuProvider'
 
 export function MobileHeader() {
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
