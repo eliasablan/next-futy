@@ -46,47 +46,50 @@ export default function MatchesCard({
             if (
               match.status === 'TIMED' ||
               match.status === 'FINISHED' ||
-              match.status === 'IN_PLAY'
+              match.status === 'IN_PLAY' ||
+              match.status === 'PAUSED'
             )
-              return (
-                <TableRow
-                  key={match.id}
-                  className={cn(
-                    match.status === 'IN_PLAY' && 'bg-green-500'
-                  )}
-                >
-                  <TableCell className="flex items-start justify-start gap-x-3">
-                    <Image
-                      src={match.homeTeam.crest}
-                      width={25}
-                      height={25}
-                      alt="Away Team Crest"
-                    />
-                    <p>{match.homeTeam.shortName}</p>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    {match.status !== 'FINISHED' &&
-                    match.status !== 'IN_PLAY'
-                      ? formatearFecha(match.utcDate)
-                          .split(' ')
-                          .map((element) => (
-                            <p key={Math.random()}>{element}</p>
-                          ))
-                      : match.score.fullTime.home +
-                        '-' +
-                        match.score.fullTime.away}
-                  </TableCell>
-                  <TableCell className="flex items-start justify-end gap-x-3">
-                    <Image
-                      src={match.awayTeam.crest}
-                      width={25}
-                      height={25}
-                      alt="Away Team Crest"
-                    />
-                    <p>{match.awayTeam.shortName}</p>
-                  </TableCell>
-                </TableRow>
-              )
+            return (
+              <TableRow
+                key={match.id}
+                className={cn(
+                  match.status === 'IN_PLAY' && 'bg-green-500',
+                  match.status === 'PAUSED' && 'bg-yellow-500'
+                )}
+              >
+                <TableCell className="flex items-start justify-start gap-x-3">
+                  <Image
+                    src={match.homeTeam.crest}
+                    width={25}
+                    height={25}
+                    alt="Away Team Crest"
+                  />
+                  <p>{match.homeTeam.shortName}</p>
+                </TableCell>
+                <TableCell className="text-center">
+                  {match.status !== 'FINISHED' &&
+                  match.status !== 'IN_PLAY' &&
+                  match.status !== 'PAUSED'
+                    ? formatearFecha(match.utcDate)
+                        .split(' ')
+                        .map((element) => (
+                          <p key={Math.random()}>{element}</p>
+                        ))
+                    : match.score.fullTime.home +
+                      '-' +
+                      match.score.fullTime.away}
+                </TableCell>
+                <TableCell className="flex items-start justify-end gap-x-3">
+                  <Image
+                    src={match.awayTeam.crest}
+                    width={25}
+                    height={25}
+                    alt="Away Team Crest"
+                  />
+                  <p>{match.awayTeam.shortName}</p>
+                </TableCell>
+              </TableRow>
+            )
           })}
         </TableBody>
       </Table>
