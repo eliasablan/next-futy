@@ -27,7 +27,7 @@ export function SidebarLeagueLink(league: League) {
       className={cn(
         'h-14 w-14',
         pathname === `/leagues/${league.code}` &&
-          'bg-accent-foreground dark:bg-accent'
+          'border border-ring dark:border-border'
       )}
     >
       <Link href={`/leagues/${league.code}`}>
