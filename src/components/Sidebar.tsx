@@ -19,7 +19,7 @@ export function Sidebar({ leagues }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'fixed inset-y-0 left-0 z-30 flex min-h-screen w-[4.5rem] transform flex-col space-y-6 overflow-y-auto bg-gray-200 text-gray-100 transition duration-200 ease-out lg:relative lg:inset-0 lg:translate-x-0',
+        'fixed inset-y-0 left-0 z-30 flex min-h-svh w-[4.5rem] transform flex-col space-y-6 overflow-y-auto bg-gray-200 text-gray-100 transition duration-200 ease-out lg:relative lg:inset-0 lg:translate-x-0',
         !mobileMenuOpen && '-translate-x-full'
       )}
     >
