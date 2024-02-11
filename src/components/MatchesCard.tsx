@@ -18,9 +18,9 @@ export default function MatchesCard({
 }) {
   if (matches.length === 0) {
     return (
-      <div className="rounded-lg bg-white px-8 py-6 shadow-md shadow-gray-200 md:col-span-1 md:row-span-1">
-        <div className="border-b border-gray-100 pb-2 sm:flex sm:items-center sm:justify-between">
-          <h2 className="text-xl font-medium text-gray-700">Games</h2>
+      <div className="rounded-lg px-8 py-6 shadow-md md:col-span-1 md:row-span-1">
+        <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">
+          <h2 className="text-xl font-medium">Games</h2>
         </div>
         <div className="mt-2 text-center">
           No games played or to be played in the current week
@@ -29,9 +29,9 @@ export default function MatchesCard({
     )
   }
   return (
-    <div className="rounded-lg bg-white px-8 py-6 shadow-md shadow-gray-200 md:col-span-1 md:row-span-1">
-      <div className="border-b border-gray-100 pb-2 sm:flex sm:items-center sm:justify-between">
-        <h2 className="text-xl font-medium text-gray-700">Games</h2>
+    <div className="rounded-lg px-8 py-6 shadow-md md:col-span-1 md:row-span-1">
+      <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">
+        <h2 className="text-xl font-medium">Games</h2>
       </div>
       <Table>
         <TableHeader>
@@ -49,47 +49,47 @@ export default function MatchesCard({
               match.status === 'IN_PLAY' ||
               match.status === 'PAUSED'
             )
-            return (
-              <TableRow
-                key={match.id}
-                className={cn(
-                  match.status === 'IN_PLAY' && 'bg-green-500',
-                  match.status === 'PAUSED' && 'bg-yellow-500'
-                )}
-              >
-                <TableCell className="flex items-start justify-start gap-x-3">
-                  <Image
-                    src={match.homeTeam.crest}
-                    width={25}
-                    height={25}
-                    alt="Away Team Crest"
-                  />
-                  <p>{match.homeTeam.shortName}</p>
-                </TableCell>
-                <TableCell className="text-center">
-                  {match.status !== 'FINISHED' &&
-                  match.status !== 'IN_PLAY' &&
-                  match.status !== 'PAUSED'
-                    ? formatearFecha(match.utcDate)
-                        .split(' ')
-                        .map((element) => (
-                          <p key={Math.random()}>{element}</p>
-                        ))
-                    : match.score.fullTime.home +
-                      '-' +
-                      match.score.fullTime.away}
-                </TableCell>
-                <TableCell className="flex items-start justify-end gap-x-3">
-                  <Image
-                    src={match.awayTeam.crest}
-                    width={25}
-                    height={25}
-                    alt="Away Team Crest"
-                  />
-                  <p>{match.awayTeam.shortName}</p>
-                </TableCell>
-              </TableRow>
-            )
+              return (
+                <TableRow
+                  key={match.id}
+                  className={cn(
+                    match.status === 'IN_PLAY' && 'bg-green-500',
+                    match.status === 'PAUSED' && 'bg-yellow-500'
+                  )}
+                >
+                  <TableCell className="flex items-start justify-start gap-x-3">
+                    <Image
+                      src={match.homeTeam.crest}
+                      width={25}
+                      height={25}
+                      alt="Away Team Crest"
+                    />
+                    <p>{match.homeTeam.shortName}</p>
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {match.status !== 'FINISHED' &&
+                    match.status !== 'IN_PLAY' &&
+                    match.status !== 'PAUSED'
+                      ? formatearFecha(match.utcDate)
+                          .split(' ')
+                          .map((element) => (
+                            <p key={Math.random()}>{element}</p>
+                          ))
+                      : match.score.fullTime.home +
+                        '-' +
+                        match.score.fullTime.away}
+                  </TableCell>
+                  <TableCell className="flex items-start justify-end gap-x-3">
+                    <Image
+                      src={match.awayTeam.crest}
+                      width={25}
+                      height={25}
+                      alt="Away Team Crest"
+                    />
+                    <p>{match.awayTeam.shortName}</p>
+                  </TableCell>
+                </TableRow>
+              )
           })}
         </TableBody>
       </Table>

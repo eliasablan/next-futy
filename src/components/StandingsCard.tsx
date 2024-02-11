@@ -19,9 +19,9 @@ export default function StandingsCard({
 }) {
   if (type == 'LEAGUE') {
     return (
-      <div className="rounded-lg bg-white px-8 py-6 shadow-md shadow-gray-200 md:col-span-1 md:row-span-1">
-        <div className="border-b border-gray-100 pb-2 sm:flex sm:items-center sm:justify-between">
-          <h2 className="text-xl font-medium text-gray-700">Standings</h2>
+      <div className="rounded-lg px-8 py-6 shadow-md md:col-span-1 md:row-span-1">
+        <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">
+          <h2 className="text-xl font-medium">Standings</h2>
         </div>
         <Table>
           <TableHeader>
@@ -68,19 +68,14 @@ export default function StandingsCard({
   if (type == 'CUP') {
     return (
       <>
-        <div className="rounded-lg bg-white px-8 py-6 shadow-md shadow-gray-200 md:col-span-1 md:row-span-1">
-          <div className="border-b border-gray-100 pb-2 sm:flex sm:items-center sm:justify-between">
-            <h2 className="text-xl font-medium text-gray-700">
-              Standings
-            </h2>
+        <div className="rounded-lg px-8 py-6 shadow-md md:col-span-1 md:row-span-1">
+          <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">
+            <h2 className="text-xl font-medium">Standings</h2>
           </div>
           {standings.map((standing: CupGroup) => (
             <div key={standing.group} className="py-4">
-              <div className="border-b border-gray-100 pb-2 sm:flex sm:items-center sm:justify-between">
-                <h2
-                  key={standing.group}
-                  className="font-medium text-gray-700"
-                >
+              <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">
+                <h2 key={standing.group} className="font-medium">
                   {standing.group}
                 </h2>
               </div>

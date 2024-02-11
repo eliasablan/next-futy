@@ -18,7 +18,7 @@ export default async function LeaguePage({
     <>
       <section className="flex w-full flex-col px-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-3xl font-medium text-gray-800">
+          <h2 className="text-3xl font-medium">
             {standings.competition.name}
           </h2>
         </div>
