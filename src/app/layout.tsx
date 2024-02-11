@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 import { MobileHeader } from '@/components/MobileHeader'
 import { Sidebar } from '@/components/Sidebar'
 import { MenuProvider } from '@/components/MenuProvider'
+import { ThemeProvider } from '@/components/theme-provider'
 
 import { fetchLeagues } from '@/lib/data/queries'
 import { League } from '@/lib/types/league'
@@ -29,15 +30,22 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cn('min-h-svh lg:flex', inter.className)}>
-        <MenuProvider>
-          <MobileHeader />
-          <div className="fixed inset-0 z-20 hidden bg-black opacity-30 transition-opacity lg:hidden"></div>
-          <Sidebar leagues={leagues} />
-        </MenuProvider>
-        <div className="flex-1 space-y-6 overflow-y-auto bg-gray-100 pb-12 md:space-y-8 lg:h-screen">
-          <Header />
-          {children}
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <MenuProvider>
+            <MobileHeader />
+            <div className="fixed inset-0 z-20 hidden bg-black opacity-30 transition-opacity lg:hidden"></div>
+            <Sidebar leagues={leagues} />
+          </MenuProvider>
+          <div className="flex-1 space-y-6 overflow-y-auto bg-gray-100 pb-12 md:space-y-8 lg:h-screen">
+            <Header />
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )
