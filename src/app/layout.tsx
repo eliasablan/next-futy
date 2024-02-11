@@ -28,9 +28,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={cn('relative min-h-screen lg:flex', inter.className)}
-      >
+      <body className={cn('min-h-dvh lg:flex', inter.className)}>
         <MenuProvider>
           <MobileHeader />
           <div className="fixed inset-0 z-20 hidden bg-black opacity-30 transition-opacity lg:hidden"></div>
