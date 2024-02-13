@@ -22,7 +22,9 @@ export function Sidebar({ leagues }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'no-scrollbar fixed inset-y-0 left-0 z-20 flex min-h-svh w-[4.5rem] transform flex-col space-y-6 overflow-y-auto border-r bg-background transition duration-200 ease-out dark:bg-foreground lg:relative lg:inset-0 lg:translate-x-0',
+        'no-scrollbar fixed inset-y-0 left-0 z-10 flex min-h-svh w-[4.5rem] transform flex-col justify-between space-y-6 border-r bg-background transition duration-200 ease-out lg:inset-0 lg:translate-x-0',
+        // same as above but with 'overflow-y-scroll' to make the sidebar scrollable
+        // 'no-scrollbar fixed inset-y-0 left-0 z-10 flex min-h-svh w-[4.5rem] transform flex-col justify-between space-y-6 overflow-y-scroll border-r bg-background transition duration-200 ease-out lg:inset-0 lg:translate-x-0',
         !mobileMenuOpen && '-translate-x-full'
       )}
     >

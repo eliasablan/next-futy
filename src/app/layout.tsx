@@ -31,9 +31,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={cn('no-scrollbar min-h-svh lg:flex', inter.className)}
-      >
+      <body className={cn('h-full min-h-svh lg:flex', inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -44,7 +42,7 @@ export default async function RootLayout({
             <MobileHeader />
             <Sidebar leagues={leagues} />
           </MenuProvider>
-          <div className="no-scrollbar flex-1 space-y-6 overflow-y-auto pb-12 md:space-y-8 lg:h-screen">
+          <div className="flex-1 space-y-6 pb-12 md:space-y-8 lg:h-screen lg:pl-[4.5rem]">
             <Header />
             {children}
           </div>

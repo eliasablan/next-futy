@@ -19,7 +19,7 @@ export default async function LeaguePage({
       <h2 className="px-6 text-2xl font-medium">
         {standings.competition.name}
       </h2>
-      <section className="grid grid-cols-1 gap-8 px-6 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-8 px-6 pb-12 md:grid-cols-2">
         <MatchesCard matches={matches.matches} />
         <StandingsCard
           type={standings.competition.type}
