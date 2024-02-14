@@ -33,7 +33,7 @@ export default function StandingsCard({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Team</TableHead>
+                <TableHead>Team</TableHead>
                 <TableHead>Pts</TableHead>
                 <TableHead>G</TableHead>
                 <TableHead>W</TableHead>
@@ -45,13 +45,13 @@ export default function StandingsCard({
             <TableBody>
               {standings[0].table.map((teamStanding: LeagueStanding) => (
                 <TableRow key={teamStanding.position}>
-                  <TableCell className="flex w-48 font-medium">
+                  <TableCell className="flex w-40 px-2 font-medium">
                     {teamStanding.team.crest && (
                       <Image
                         src={teamStanding.team.crest}
                         className="mr-2"
-                        width={25}
-                        height={25}
+                        width={22}
+                        height={22}
                         alt="Team Crest"
                       />
                     )}
@@ -81,14 +81,14 @@ export default function StandingsCard({
           {standings.map((standing: CupGroup) => (
             <div key={standing.group} className="py-4">
               <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">
-                <h2 key={standing.group} className="text-base font-medium">
+                <h2 key={standing.group} className="text-base font-normal">
                   {standing.group}
                 </h2>
               </div>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[100px]">Team</TableHead>
+                    <TableHead>Team</TableHead>
                     <TableHead>Pts</TableHead>
                     <TableHead>G</TableHead>
                     <TableHead>W</TableHead>
@@ -100,13 +100,13 @@ export default function StandingsCard({
                 <TableBody>
                   {standing.table.map((teamStanding: LeagueStanding) => (
                     <TableRow key={teamStanding.position}>
-                      <TableCell className="flex w-48 font-medium">
+                      <TableCell className="flex w-40 px-2 font-medium">
                         {teamStanding.team.crest && (
                           <Image
                             src={teamStanding.team.crest}
                             className="mr-2"
-                            width={25}
-                            height={25}
+                            width={22}
+                            height={22}
                             alt="Team Crest"
                           />
                         )}

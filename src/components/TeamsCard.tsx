@@ -68,7 +68,7 @@ export default async function TeamsCard({
                         height={40}
                       />
                     )}
-                    <span className="mt-5 w-full overflow-hidden text-ellipsis text-wrap ">
+                    <span className="mt-5 w-full overflow-hidden text-ellipsis text-wrap">
                       {team.name ? team.name : 'Not found'}
                     </span>
                   </Link>
