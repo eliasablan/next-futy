@@ -6,7 +6,7 @@ const Leagues = () => {
   return (
     <>
       <SearchBar />
-      <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2 2xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
         <LeaguesCard />
       </div>
     </>

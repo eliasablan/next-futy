@@ -9,7 +9,7 @@ export default async function Games() {
   return (
     <>
       <SearchBar />
-      <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2 2xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2">
         <MatchesCard matches={matches.matches} />
       </div>
     </>
