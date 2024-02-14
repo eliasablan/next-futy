@@ -1,6 +1,5 @@
 import React from 'react'
 import { Analytics } from '@vercel/analytics/react'
-// import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -31,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('h-full min-h-svh lg:flex', inter.className)}>
+      <body className={cn('min-h-svh', inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -42,13 +41,12 @@ export default async function RootLayout({
             <MobileHeader />
             <Sidebar leagues={leagues} />
           </MenuProvider>
-          <div className="flex-1 space-y-6 pb-12 md:space-y-8 lg:h-screen lg:pl-[4.5rem]">
+          <div className="lg:pl-64">
             <Header />
             {children}
           </div>
         </ThemeProvider>
         <Analytics />
-        {/* <SpeedInsights /> */}
       </body>
     </html>
   )

@@ -14,6 +14,23 @@ export const fetchLeagues = async () => {
   return data.competitions
 }
 
+export const fetchTeams = async ({ page = 1, limit = 12 }) => {
+  const teams_url =
+    process.env.FOOTBALL_DATA_ORG_URL +
+    'teams/' +
+    `?limit=${limit}` +
+    `&offset=${(page - 1) * limit}`
+  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+
+  const res = await fetch(teams_url, {
+    headers: {
+      'X-Auth-Token': auth_token,
+    },
+  })
+  const data = await res.json()
+  return { teams: data.teams, offset: data.filters.offset }
+}
+
 export const fetchCompetitionStandings = async (code: string) => {
   const competition_url =
     `${process.env.FOOTBALL_DATA_ORG_URL}competitions/${code}/standings` ||

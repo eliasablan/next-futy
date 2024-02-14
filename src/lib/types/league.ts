@@ -2,7 +2,7 @@ interface Area {
   id: number
   name: string
   code: string
-  flag: string
+  flag: string | null
 }
 
 interface CurrentSeason {
