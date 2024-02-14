@@ -42,7 +42,7 @@ export function Sidebar({ leagues }: SidebarProps) {
             ))}
         </nav>
       </div>
-      <div className="flex justify-between p-4">
+      <div className="container sticky bottom-0 left-0 flex justify-between border-t bg-primary-foreground p-2 text-primary">
         <ProfileButton />
         <ModeToggle />
       </div>
