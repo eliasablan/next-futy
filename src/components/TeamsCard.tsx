@@ -43,7 +43,7 @@ export default async function TeamsCard({
       </CardHeader>
       <CardContent>
         <div className="relative">
-          <div className="xs:grid-cols-3 mx-auto mt-2 grid w-full grid-cols-2 justify-items-center sm:grid-cols-4">
+          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3">
             {teams &&
               teams.map((team) => (
                 <Button
@@ -52,7 +52,7 @@ export default async function TeamsCard({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    'h-40 w-full px-2',
+                    'h-40 w-full border px-2',
                     !team.tla && 'pointer-events-none opacity-35'
                   )}
                 >

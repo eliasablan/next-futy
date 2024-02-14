@@ -23,7 +23,7 @@ export default async function LeaguesCard() {
       </CardHeader>
       <CardContent>
         <div className="relative">
-          <div className="xs:grid-cols-3 mx-auto mt-2 grid w-full grid-cols-2 justify-items-center sm:grid-cols-4">
+          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3">
             {leagues &&
               leagues.map((league) => (
                 <Button
@@ -31,7 +31,7 @@ export default async function LeaguesCard() {
                   asChild
                   variant="ghost"
                   size="icon"
-                  className="h-40 w-full px-2"
+                  className="h-40 w-full border px-2"
                 >
                   <Link
                     className="flex flex-col text-center"
