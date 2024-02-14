@@ -26,7 +26,7 @@ export default async function TeamsCard({
   searchParams: SearchParams
 }) {
   const totalPages = 636
-  const page = Number(searchParams.page) || 1
+  const page = (searchParams.page || 1) as number
   const { teams }: { teams: Team[] } = await fetchTeams({ page })
 
   return (
@@ -76,13 +76,17 @@ export default async function TeamsCard({
             <PaginationContent>
               {page > 1 && (
                 <PaginationItem>
-                  <PaginationPrevious href={`?page=${page - 1}`} />
+                  <PaginationPrevious
+                    href={`?${new URLSearchParams({ page: `${Number(page) - 1}` })}`}
+                  />
                 </PaginationItem>
               )}
 
               {page > 2 && (
                 <PaginationItem>
-                  <PaginationLink href={`?page=${page - 2}`}>
+                  <PaginationLink
+                    href={`?${new URLSearchParams({ page: `${Number(page) - 2}` })}`}
+                  >
                     <PaginationEllipsis />
                   </PaginationLink>
                 </PaginationItem>
@@ -90,7 +94,9 @@ export default async function TeamsCard({
 
               {page > 1 && (
                 <PaginationItem>
-                  <PaginationLink href={`?page=${page - 1}`}>
+                  <PaginationLink
+                    href={`?${new URLSearchParams({ page: `${Number(page) - 1}` })}`}
+                  >
                     {page - 1}
                   </PaginationLink>
                 </PaginationItem>
@@ -98,8 +104,8 @@ export default async function TeamsCard({
 
               <PaginationItem>
                 <PaginationLink
-                  className="pointer-events-none opacity-50"
-                  href={`?page=${page}`}
+                  className="cursor-default"
+                  href={`?${new URLSearchParams({ page: `${Number(page)}` })}`}
                   isActive
                 >
                   {page}
@@ -108,15 +114,19 @@ export default async function TeamsCard({
 
               {page < totalPages && (
                 <PaginationItem>
-                  <PaginationLink href={`?page=${page + 1}`}>
-                    {page + 1}
+                  <PaginationLink
+                    href={`?${new URLSearchParams({ page: `${Number(page) + 1}` })}`}
+                  >
+                    {Number(page) + 1}
                   </PaginationLink>
                 </PaginationItem>
               )}
 
               {page < totalPages - 1 && (
                 <PaginationItem>
-                  <PaginationLink href={`?page=${page + 2}`}>
+                  <PaginationLink
+                    href={`?${new URLSearchParams({ page: `${Number(page) + 2}` })}`}
+                  >
                     <PaginationEllipsis />
                   </PaginationLink>
                 </PaginationItem>
@@ -124,7 +134,9 @@ export default async function TeamsCard({
 
               {page < totalPages && (
                 <PaginationItem>
-                  <PaginationNext href={`?page=${page + 1}`} />
+                  <PaginationNext
+                    href={`?${new URLSearchParams({ page: `${Number(page) + 1}` })}`}
+                  />
                 </PaginationItem>
               )}
             </PaginationContent>
