@@ -19,7 +19,6 @@ const nextConfig = {
         hostname: 'randomuser.me',
       },
       {
-        protocol: 'https',
         hostname: 'upload.wikimedia.org',
       },
     ],
