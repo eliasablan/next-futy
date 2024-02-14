@@ -45,9 +45,9 @@ export default function MatchesCard({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-left">Home Team</TableHead>
+              <TableHead className="text-left">Home</TableHead>
               <TableHead className="text-center">Score</TableHead>
-              <TableHead className="text-right">Away Team</TableHead>
+              <TableHead className="text-right">Away</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -62,23 +62,27 @@ export default function MatchesCard({
                   <TableRow
                     key={match.id}
                     className={cn(
+                      'h-20',
                       match.status === 'IN_PLAY' && 'bg-green-500',
                       match.status === 'PAUSED' && 'bg-yellow-500'
                     )}
                   >
-                    <TableCell className="flex items-start justify-start gap-x-3">
-                      <Image
-                        src={match.homeTeam.crest}
-                        width={25}
-                        height={25}
-                        alt="Away Team Crest"
-                      />
-                      <p>{match.homeTeam.shortName}</p>
+                    <TableCell>
+                      <div className="flex justify-start">
+                        <Image
+                          src={match.homeTeam.crest}
+                          width={25}
+                          height={25}
+                          alt="Away Team Crest"
+                        />
+                        <span className="mx-2">
+                          {match.homeTeam.shortName}
+                        </span>
+                      </div>
                     </TableCell>
-                    <TableCell className="text-center">
-                      {match.status !== 'FINISHED' &&
-                      match.status !== 'IN_PLAY' &&
-                      match.status !== 'PAUSED'
+
+                    <TableCell className="text-center font-extrabold">
+                      {match.status === 'TIMED'
                         ? formatearFecha(match.utcDate)
                             .split(' ')
                             .map((element) => (
@@ -88,14 +92,19 @@ export default function MatchesCard({
                           '-' +
                           match.score.fullTime.away}
                     </TableCell>
-                    <TableCell className="flex items-start justify-end gap-x-3">
-                      <Image
-                        src={match.awayTeam.crest}
-                        width={25}
-                        height={25}
-                        alt="Away Team Crest"
-                      />
-                      <p>{match.awayTeam.shortName}</p>
+
+                    <TableCell>
+                      <div className="flex justify-end">
+                        <span className="mx-2">
+                          {match.awayTeam.shortName}
+                        </span>
+                        <Image
+                          src={match.awayTeam.crest}
+                          width={25}
+                          height={25}
+                          alt="Away Team Crest"
+                        />
+                      </div>
                     </TableCell>
                   </TableRow>
                 )

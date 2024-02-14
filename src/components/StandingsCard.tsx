@@ -44,18 +44,20 @@ export default function StandingsCard({
             </TableHeader>
             <TableBody>
               {standings[0].table.map((teamStanding: LeagueStanding) => (
-                <TableRow key={teamStanding.position}>
-                  <TableCell className="flex w-40 px-2 font-medium">
-                    {teamStanding.team.crest && (
-                      <Image
-                        src={teamStanding.team.crest}
-                        className="mr-2"
-                        width={22}
-                        height={22}
-                        alt="Team Crest"
-                      />
-                    )}
-                    {teamStanding.team.shortName}
+                <TableRow key={teamStanding.position} className="h-20">
+                  <TableCell>
+                    <div className="flex justify-start">
+                      {teamStanding.team.crest && (
+                        <Image
+                          src={teamStanding.team.crest}
+                          className="mr-2"
+                          width={22}
+                          height={22}
+                          alt="Team Crest"
+                        />
+                      )}
+                      {teamStanding.team.shortName}
+                    </div>
                   </TableCell>
                   <TableCell>{teamStanding.points}</TableCell>
                   <TableCell>{teamStanding.playedGames}</TableCell>
