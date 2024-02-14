@@ -31,8 +31,9 @@ export function Sidebar({ leagues }: SidebarProps) {
       <div className="flex flex-1 flex-col items-center">
         <Link
           href="/"
-          className="flex h-16 w-full items-center justify-center border-b border-primary-foreground bg-accent p-5 hover:bg-destructive lg:p-0"
+          className="inline-flex h-16 w-full items-center justify-end border-b border-primary-foreground bg-accent p-5 pr-4 hover:bg-destructive"
         >
+          <h1 className="mr-2 text-2xl font-bold">Futy</h1>
           <Image src={ballLogo} width={30} height={30} alt="ball" />
         </Link>
         <nav className="flex w-full flex-col items-center">
