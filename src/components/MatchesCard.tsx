@@ -62,13 +62,13 @@ export default function MatchesCard({
                   <TableRow
                     key={match.id}
                     className={cn(
-                      'h-20',
-                      match.status === 'IN_PLAY' && 'bg-green-500',
-                      match.status === 'PAUSED' && 'bg-yellow-500'
+                      'h-10',
+                      match.status === 'IN_PLAY' && 'bg-secondary',
+                      match.status === 'PAUSED' && 'bg-destructive'
                     )}
                   >
                     <TableCell>
-                      <div className="flex justify-start">
+                      <div className="flex justify-start font-medium">
                         <Image
                           src={match.homeTeam.crest}
                           width={25}
@@ -81,20 +81,28 @@ export default function MatchesCard({
                       </div>
                     </TableCell>
 
-                    <TableCell className="text-center font-extrabold">
-                      {match.status === 'TIMED'
-                        ? formatearFecha(match.utcDate)
-                            .split(' ')
-                            .map((element) => (
-                              <p key={Math.random()}>{element}</p>
-                            ))
-                        : match.score.fullTime.home +
-                          '-' +
-                          match.score.fullTime.away}
+                    <TableCell className="text-center font-bold">
+                      <p className="text-xs font-normal">
+                        {match.status === 'TIMED' &&
+                          formatearFecha(match.utcDate).split(' ')[1]}
+                        {match.status === 'IN_PLAY' && 'Live'}
+                        {match.status === 'PAUSED' && 'Pause'}
+                        {match.status === 'FINISHED' && 'FT'}
+                      </p>
+                      <p>
+                        {match.status === 'TIMED' &&
+                          formatearFecha(match.utcDate)
+                            .split(' ')[0]
+                            .substring(0, 5)}
+                        {match.status !== 'TIMED' &&
+                          match.score.fullTime.home +
+                            '-' +
+                            match.score.fullTime.away}
+                      </p>
                     </TableCell>
 
                     <TableCell>
-                      <div className="flex justify-end">
+                      <div className="flex justify-end font-medium">
                         <span className="mx-2">
                           {match.awayTeam.shortName}
                         </span>
