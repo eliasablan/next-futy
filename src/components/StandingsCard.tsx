@@ -34,12 +34,12 @@ export default function StandingsCard({
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px]">Team</TableHead>
-                <TableHead>PG</TableHead>
+                <TableHead>Pts</TableHead>
+                <TableHead>G</TableHead>
                 <TableHead>W</TableHead>
                 <TableHead>D</TableHead>
                 <TableHead>L</TableHead>
-                <TableHead>GD</TableHead>
-                <TableHead className="text-right">Points</TableHead>
+                <TableHead>{'+/-'}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,14 +57,12 @@ export default function StandingsCard({
                     )}
                     {teamStanding.team.shortName}
                   </TableCell>
+                  <TableCell>{teamStanding.points}</TableCell>
                   <TableCell>{teamStanding.playedGames}</TableCell>
                   <TableCell>{teamStanding.won}</TableCell>
                   <TableCell>{teamStanding.draw}</TableCell>
                   <TableCell>{teamStanding.lost}</TableCell>
                   <TableCell>{teamStanding.goalDifference}</TableCell>
-                  <TableCell className="text-right">
-                    {teamStanding.points}
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -91,12 +89,12 @@ export default function StandingsCard({
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[100px]">Team</TableHead>
-                    <TableHead>PG</TableHead>
+                    <TableHead>Pts</TableHead>
+                    <TableHead>G</TableHead>
                     <TableHead>W</TableHead>
                     <TableHead>D</TableHead>
                     <TableHead>L</TableHead>
-                    <TableHead>GD</TableHead>
-                    <TableHead className="text-right">Points</TableHead>
+                    <TableHead>{'+/-'}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -114,14 +112,12 @@ export default function StandingsCard({
                         )}
                         {teamStanding.team.shortName}
                       </TableCell>
+                      <TableCell>{teamStanding.points}</TableCell>
                       <TableCell>{teamStanding.playedGames}</TableCell>
                       <TableCell>{teamStanding.won}</TableCell>
                       <TableCell>{teamStanding.draw}</TableCell>
                       <TableCell>{teamStanding.lost}</TableCell>
                       <TableCell>{teamStanding.goalDifference}</TableCell>
-                      <TableCell className="text-right">
-                        {teamStanding.points}
-                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
