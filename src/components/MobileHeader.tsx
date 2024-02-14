@@ -10,11 +10,11 @@ export function MobileHeader() {
   return (
     <>
       <header className="lg:hidden">
-        <div className="flex h-28 items-center justify-between border-b p-6">
+        <div className="flex h-16 items-center justify-between border-b p-6">
           <Link href="/" className="focus:ring">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12"
+              className="h-10 w-10"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -28,12 +28,12 @@ export function MobileHeader() {
             </svg>
           </Link>
           <Button
-            className="z-10 h-11 w-11 rounded-lg p-2 focus:ring"
+            className="z-10 h-10 w-10 rounded-lg p-2 focus:ring"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={cn('block h-12 w-12', mobileMenuOpen && 'hidden')}
+              className={cn('block', mobileMenuOpen && 'hidden')}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -47,7 +47,7 @@ export function MobileHeader() {
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className={cn('hidden h-12 w-12', mobileMenuOpen && 'block')}
+              className={cn('hidden', mobileMenuOpen && 'block')}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

@@ -23,7 +23,7 @@ export function Sidebar({ leagues }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'no-scrollbar overflow-y-scroll bg-primary-foreground text-primary lg:overflow-y-visible',
+        'no-scrollbar overflow-y-scroll bg-primary-foreground text-primary ',
         'fixed inset-y-0 left-0 z-10 flex min-h-svh w-64 transform flex-col justify-between border-r transition duration-200 ease-out lg:inset-0 lg:translate-x-0',
         !mobileMenuOpen && '-translate-x-full'
       )}
@@ -31,9 +31,9 @@ export function Sidebar({ leagues }: SidebarProps) {
       <div className="flex flex-1 flex-col items-center">
         <Link
           href="/"
-          className="flex h-28 w-full items-center justify-center border-b border-primary-foreground bg-accent p-5 hover:bg-destructive lg:p-0"
+          className="flex h-16 w-full items-center justify-center border-b border-primary-foreground bg-accent p-5 hover:bg-destructive lg:p-0"
         >
-          <Image src={ballLogo} width={36} height={36} alt="ball" />
+          <Image src={ballLogo} width={30} height={30} alt="ball" />
         </Link>
         <nav className="flex w-full flex-col items-center">
           {leagues &&

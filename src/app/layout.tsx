@@ -30,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('min-h-svh', inter.className)}>
+      <body className={cn('min-h-svh lg:pl-64', inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -39,12 +39,10 @@ export default async function RootLayout({
         >
           <MenuProvider>
             <MobileHeader />
+            <Header />
             <Sidebar leagues={leagues} />
           </MenuProvider>
-          <div className="lg:pl-64">
-            <Header />
-            {children}
-          </div>
+          {children}
         </ThemeProvider>
         <Analytics />
       </body>
