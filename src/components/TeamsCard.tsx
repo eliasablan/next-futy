@@ -1,12 +1,9 @@
 import React from 'react'
-import { Team } from '@/lib/types/team'
+import Link from 'next/link'
+import Image from 'next/image'
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card'
 import { Button } from './ui/button'
 import {
   Pagination,
@@ -18,10 +15,9 @@ import {
   PaginationPrevious,
 } from './ui/pagination'
 
-import Link from 'next/link'
-import Image from 'next/image'
 import { fetchTeams } from '@/lib/data/queries'
-import { cn } from '@/lib/utils'
+
+import { Team } from '@/lib/types/team'
 import { SearchParams } from '@/lib/types/searchParams'
 
 export default async function TeamsCard({
@@ -30,10 +26,7 @@ export default async function TeamsCard({
   searchParams: SearchParams
 }) {
   const totalPages = 636
-  const page =
-    searchParams?.page && typeof searchParams.page === 'string'
-      ? Number(searchParams.page)
-      : 1
+  const page = Number(searchParams.page) || 1
   const { teams }: { teams: Team[] } = await fetchTeams({ page })
 
   return (
@@ -42,6 +35,7 @@ export default async function TeamsCard({
         <CardTitle className="text-lg">Teams</CardTitle>
       </CardHeader>
       <CardContent>
+        {/* Table of teams */}
         <div className="relative">
           <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3">
             {teams &&
@@ -76,18 +70,19 @@ export default async function TeamsCard({
               ))}
           </div>
         </div>
+        {/* Pagination */}
         <div className="container mx-auto inline-block">
           <Pagination className="mt-6">
             <PaginationContent>
               {page > 1 && (
                 <PaginationItem>
-                  <PaginationPrevious href={`/?page=${page - 1}`} />
+                  <PaginationPrevious href={`?page=${page - 1}`} />
                 </PaginationItem>
               )}
 
               {page > 2 && (
                 <PaginationItem>
-                  <PaginationLink href={`/?page=${page - 1}`}>
+                  <PaginationLink href={`?page=${page - 2}`}>
                     <PaginationEllipsis />
                   </PaginationLink>
                 </PaginationItem>
@@ -95,7 +90,7 @@ export default async function TeamsCard({
 
               {page > 1 && (
                 <PaginationItem>
-                  <PaginationLink href={`/?page=${page - 1}`}>
+                  <PaginationLink href={`?page=${page - 1}`}>
                     {page - 1}
                   </PaginationLink>
                 </PaginationItem>
@@ -104,7 +99,7 @@ export default async function TeamsCard({
               <PaginationItem>
                 <PaginationLink
                   className="pointer-events-none opacity-50"
-                  href={`/?page=${page}`}
+                  href={`?page=${page}`}
                   isActive
                 >
                   {page}
@@ -113,7 +108,7 @@ export default async function TeamsCard({
 
               {page < totalPages && (
                 <PaginationItem>
-                  <PaginationLink href={`/?page=${page + 1}`}>
+                  <PaginationLink href={`?page=${page + 1}`}>
                     {page + 1}
                   </PaginationLink>
                 </PaginationItem>
@@ -121,7 +116,7 @@ export default async function TeamsCard({
 
               {page < totalPages - 1 && (
                 <PaginationItem>
-                  <PaginationLink href={`/?page=${page + 2}`}>
+                  <PaginationLink href={`?page=${page + 2}`}>
                     <PaginationEllipsis />
                   </PaginationLink>
                 </PaginationItem>
@@ -129,7 +124,7 @@ export default async function TeamsCard({
 
               {page < totalPages && (
                 <PaginationItem>
-                  <PaginationNext href={`/?page=${page + 1}`} />
+                  <PaginationNext href={`?page=${page + 1}`} />
                 </PaginationItem>
               )}
             </PaginationContent>
