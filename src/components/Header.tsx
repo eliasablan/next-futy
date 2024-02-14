@@ -12,6 +12,13 @@ export default function Header() {
   return (
     <header className="my-auto flex h-16 items-center border-b px-6">
       <Button
+        variant={pathname !== '/games' ? 'link' : 'secondary'}
+        asChild
+      >
+        <Link href="/games">Games</Link>
+      </Button>
+
+      <Button
         variant={pathname !== '/leagues' ? 'link' : 'secondary'}
         asChild
       >

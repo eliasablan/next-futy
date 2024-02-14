@@ -38,7 +38,7 @@ export const fetchCompetitionStandings = async (code: string) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
-    cache: 'no-store',
+    // cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
@@ -54,6 +54,20 @@ export const fetchCompetitionMatches = async (code: string) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
+    cache: 'no-store',
+    headers: {
+      'X-Auth-Token': auth_token,
+    },
+  })
+  const data = await res.json()
+  return data
+}
+
+export const fetchDayMatches = async () => {
+  const matches_url = `${process.env.FOOTBALL_DATA_ORG_URL}matches` || ''
+  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+
+  const res = await fetch(matches_url, {
     cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
