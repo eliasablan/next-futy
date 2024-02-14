@@ -64,7 +64,7 @@ export function MobileHeader() {
       </header>
       <div
         className={cn(
-          'no-scrollbar fixed inset-0 z-10 bg-background opacity-70 lg:hidden',
+          'fixed inset-0 z-10 bg-background opacity-70 no-scrollbar lg:hidden',
           mobileMenuOpen ? 'block' : 'hidden'
         )}
         onClick={() => setMobileMenuOpen(false)}

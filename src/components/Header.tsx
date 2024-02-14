@@ -10,7 +10,7 @@ export default function Header() {
   const pathname = usePathname()
 
   return (
-    <header className="my-auto flex h-16 items-center border-b px-6">
+    <header className="container sticky top-0 z-20 my-auto flex h-16 items-center border-b bg-primary-foreground px-6 lg:fixed">
       <Button
         variant={pathname !== '/games' ? 'link' : 'secondary'}
         asChild

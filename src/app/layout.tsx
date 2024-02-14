@@ -42,7 +42,7 @@ export default async function RootLayout({
             <Header />
             <Sidebar leagues={leagues} />
           </MenuProvider>
-          {children}
+          <div className="lg:pt-16">{children}</div>
         </ThemeProvider>
         <Analytics />
       </body>
