@@ -17,7 +17,7 @@ import {
 
 import { fetchTeams } from '@/lib/data/queries'
 
-import { Team } from '@/lib/types/team'
+import { CardTeam } from '@/lib/types/team'
 import { SearchParams } from '@/lib/types/searchParams'
 import {
   Collapsible,
@@ -33,7 +33,7 @@ export default async function TeamsCard({
 }) {
   const totalPages = 636
   const page = (searchParams.page || 1) as number
-  const { teams }: { teams: Team[] } = await fetchTeams({ page })
+  const { teams }: { teams: CardTeam[] } = await fetchTeams({ page })
 
   return (
     <Card className="h-fit">
@@ -66,7 +66,7 @@ export default async function TeamsCard({
                     >
                       <Link
                         className="flex flex-col text-center"
-                        href={`/teams/${team.tla}`}
+                        href={`/teams/${team.id}`}
                       >
                         {team.crest && (
                           <Image
