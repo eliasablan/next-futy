@@ -9,8 +9,10 @@ const Home = async ({ searchParams }: { searchParams: SearchParams }) => {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <MatchesCard matches={matches.matches} />
-      <LeaguesCard />
+      <div className="grid h-fit gap-4">
+        <MatchesCard matches={matches.matches} />
+        <LeaguesCard />
+      </div>
       <TeamsCard searchParams={searchParams} />
     </div>
   )
