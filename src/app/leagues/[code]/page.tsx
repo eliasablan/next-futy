@@ -15,7 +15,7 @@ export default async function LeaguePage({
   const matches = await fetchCompetitionMatches(params.code)
 
   return (
-    <div className="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2 2xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <MatchesCard matches={matches.matches} />
       <StandingsCard
         type={standings.competition.type}

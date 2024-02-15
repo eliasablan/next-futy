@@ -26,10 +26,10 @@ export default function StandingsCard({
   if (type == 'LEAGUE') {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Standings</CardTitle>
+        <CardHeader className="py-3">
+          <CardTitle className="text-xl">Standings</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="border-t">
           <Table>
             <TableHeader>
               <TableRow>
@@ -44,16 +44,17 @@ export default function StandingsCard({
             </TableHeader>
             <TableBody>
               {standings[0].table.map((teamStanding: LeagueStanding) => (
-                <TableRow key={teamStanding.position} className="h-20">
+                <TableRow key={teamStanding.position}>
                   <TableCell>
-                    <div className="flex justify-start">
+                    <div className="flex h-6 justify-start">
                       {teamStanding.team.crest && (
                         <Image
                           src={teamStanding.team.crest}
                           className="mr-2"
+                          h-6
                           width={22}
                           height={22}
-                          alt="Team Crest"
+                          alt={teamStanding.team.shortName}
                         />
                       )}
                       {teamStanding.team.shortName}
@@ -76,10 +77,10 @@ export default function StandingsCard({
   if (type == 'CUP') {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Standings</CardTitle>
+        <CardHeader className="py-3">
+          <CardTitle className="text-xl">Standings</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="border-t">
           {standings.map((standing: CupGroup) => (
             <div key={standing.group} className="py-4">
               <div className="border-b pb-2 sm:flex sm:items-center sm:justify-between">

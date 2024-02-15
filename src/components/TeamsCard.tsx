@@ -31,13 +31,13 @@ export default async function TeamsCard({
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Teams</CardTitle>
+      <CardHeader className="py-3">
+        <CardTitle className="text-xl">Teams</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="border-t">
         {/* Table of teams */}
         <div className="relative">
-          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3">
+          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
             {teams &&
               teams.map((team) => (
                 <Button
@@ -46,7 +46,7 @@ export default async function TeamsCard({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    'h-40 w-full border px-2',
+                    'flex h-32 w-full flex-col justify-center border px-2',
                     !team.tla && 'pointer-events-none opacity-35'
                   )}
                 >

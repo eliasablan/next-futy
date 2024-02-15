@@ -18,12 +18,12 @@ export default async function LeaguesCard() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Leagues</CardTitle>
+      <CardHeader className="py-3">
+        <CardTitle className="text-xl">Leagues</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="border-t">
         <div className="relative">
-          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3">
+          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
             {leagues &&
               leagues.map((league) => (
                 <Button
@@ -31,7 +31,7 @@ export default async function LeaguesCard() {
                   asChild
                   variant="ghost"
                   size="icon"
-                  className="h-40 w-full border px-2"
+                  className="flex h-32 w-full flex-col justify-center border px-2"
                 >
                   <Link
                     className="flex flex-col text-center"
@@ -45,7 +45,7 @@ export default async function LeaguesCard() {
                         height={40}
                       />
                     )}
-                    <span className="mt-5 w-full overflow-hidden text-ellipsis text-wrap ">
+                    <span className="mt-2 w-full overflow-hidden text-ellipsis text-wrap">
                       {league.name ? league.name : 'Not found'}
                     </span>
                   </Link>
