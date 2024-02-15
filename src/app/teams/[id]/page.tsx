@@ -11,8 +11,10 @@ const TeamPage = async ({ params }: { params: { id: number } }) => {
   const matches: Match[] = await fetchMatches(params.id)
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <TeamCard team={team} />
-      <MatchesCard matches={matches} />
+      <div className="grid h-fit gap-4">
+        <TeamCard team={team} />
+        <MatchesCard matches={matches} />
+      </div>
       <PlayersCard players={team.squad} />
     </div>
   )
