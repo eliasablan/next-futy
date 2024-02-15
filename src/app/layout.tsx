@@ -30,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('min-h-svh lg:pl-52', inter.className)}>
+      <body className={cn('min-h-svh lg:pl-72', inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
