@@ -7,7 +7,13 @@ import {
   CardTitle,
   CardContent,
 } from '@/components/ui/card'
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from './ui/collapsible'
 import { Button } from './ui/button'
+import { CaretSortIcon } from '@radix-ui/react-icons'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -17,43 +23,53 @@ export default async function LeaguesCard() {
   const leagues: League[] = await fetchLeagues()
 
   return (
-    <Card>
-      <CardHeader className="py-3">
-        <CardTitle className="text-xl">Leagues</CardTitle>
-      </CardHeader>
-      <CardContent className="border-t">
-        <div className="relative">
-          <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
-            {leagues &&
-              leagues.map((league) => (
-                <Button
-                  key={league.id}
-                  asChild
-                  variant="ghost"
-                  size="icon"
-                  className="flex h-32 w-full flex-col justify-center border px-2"
-                >
-                  <Link
-                    className="flex flex-col text-center"
-                    href={`/leagues/${league.code}`}
-                  >
-                    {league.emblem && (
-                      <Image
-                        src={league.emblem}
-                        alt={league.name}
-                        width={40}
-                        height={40}
-                      />
-                    )}
-                    <span className="mt-2 w-full overflow-hidden text-ellipsis text-wrap">
-                      {league.name ? league.name : 'Not found'}
-                    </span>
-                  </Link>
-                </Button>
-              ))}
-          </div>
-        </div>
-      </CardContent>
+    <Card className="h-fit">
+      <Collapsible defaultOpen>
+        <CardHeader className="flex flex-row items-center justify-between py-3">
+          <CardTitle className="text-xl leading-none">Leagues</CardTitle>
+          <CollapsibleTrigger className="!mt-1">
+            <Button variant="outline" size="icon" className="h-8 w-8">
+              <CaretSortIcon className="h-8 w-8" />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        </CardHeader>
+        <CollapsibleContent>
+          <CardContent className="border-t">
+            <div className="relative">
+              <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
+                {leagues &&
+                  leagues.map((league) => (
+                    <Button
+                      key={league.id}
+                      asChild
+                      variant="ghost"
+                      size="icon"
+                      className="flex h-32 w-full flex-col justify-center border px-2"
+                    >
+                      <Link
+                        className="flex flex-col text-center"
+                        href={`/leagues/${league.code}`}
+                      >
+                        {league.emblem && (
+                          <Image
+                            src={league.emblem}
+                            alt={league.name}
+                            width={40}
+                            height={40}
+                          />
+                        )}
+                        <span className="mt-2 w-full overflow-hidden text-ellipsis text-wrap">
+                          {league.name ? league.name : 'Not found'}
+                        </span>
+                      </Link>
+                    </Button>
+                  ))}
+              </div>
+            </div>
+          </CardContent>
+        </CollapsibleContent>
+      </Collapsible>
     </Card>
   )
 }

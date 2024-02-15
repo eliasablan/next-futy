@@ -18,7 +18,7 @@ export function SidebarLeagueLink(league: League) {
       variant="ghost"
       size="icon"
       className={cn(
-        'h-auto w-full rounded-none py-2',
+        'h-auto w-full rounded-none border-b py-2',
         pathname === `/leagues/${league.code}` && 'border bg-accent'
       )}
     >
@@ -33,7 +33,7 @@ export function SidebarLeagueLink(league: League) {
           width={30}
           height={30}
         />
-        <p className="w-full text-wrap font-semibold tracking-wider">
+        <p className="w-full text-wrap font-semibold leading-tight tracking-wider">
           {league.name}
         </p>
       </Link>
