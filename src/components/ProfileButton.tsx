@@ -14,7 +14,11 @@ export function ProfileButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-14 w-14">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-12 w-12 rounded-none"
+        >
           <PersonIcon className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">Profile options</span>
         </Button>

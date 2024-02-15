@@ -30,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('min-h-svh lg:pl-64', inter.className)}>
+      <body className={cn('min-h-svh lg:pl-52', inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -38,14 +38,17 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <MenuProvider>
+            <Sidebar leagues={leagues} />
             <MobileHeader />
             <Header />
-            <Sidebar leagues={leagues} />
           </MenuProvider>
-          <div className="lg:pt-16">{children}</div>
+          <div className="mx-auto max-w-7xl gap-6 p-6 lg:pt-[88px]">
+            {children}
+          </div>
         </ThemeProvider>
         <Analytics />
       </body>
     </html>
   )
 }
+// 64 + 24

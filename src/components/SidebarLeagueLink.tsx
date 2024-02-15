@@ -18,22 +18,24 @@ export function SidebarLeagueLink(league: League) {
       variant="ghost"
       size="icon"
       className={cn(
-        'h-16 w-full rounded-none border-b border-secondary',
-        pathname === `/leagues/${league.code}` && 'border-2 bg-accent'
+        'h-auto w-full rounded-none py-2',
+        pathname === `/leagues/${league.code}` && 'border bg-accent'
       )}
     >
       <Link
         onClick={() => setMobileMenuOpen(false)}
         href={`/leagues/${league.code}`}
-        className="flex justify-center gap-x-4"
+        className="flex justify-center gap-x-3 px-3 antialiased"
       >
         <Image
           src={league.emblem}
           alt={league.name}
-          width={40}
-          height={40}
+          width={30}
+          height={30}
         />
-        <p className="w-40 text-wrap">{league.name}</p>
+        <p className="w-full text-wrap font-semibold tracking-wider">
+          {league.name}
+        </p>
       </Link>
     </Button>
   )

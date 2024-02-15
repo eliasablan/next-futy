@@ -18,20 +18,21 @@ interface SidebarProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export function Sidebar({ leagues }: SidebarProps) {
-  const { mobileMenuOpen } = useContext(MenuContext)
+  const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
 
   return (
     <aside
       className={cn(
         'overflow-y-scroll bg-primary-foreground text-primary no-scrollbar ',
-        'fixed inset-y-0 left-0 z-20 flex min-h-svh w-64 transform flex-col justify-between border-r transition duration-200 ease-out lg:inset-0 lg:translate-x-0',
+        'fixed inset-y-0 left-0 z-30 flex min-h-svh w-52 transform flex-col justify-between border-r transition duration-200 ease-out lg:inset-0 lg:translate-x-0',
         !mobileMenuOpen && '-translate-x-full'
       )}
     >
       <div className="flex flex-1 flex-col items-center">
         <Link
           href="/"
-          className="inline-flex h-16 w-full items-center justify-end border-b border-primary-foreground bg-accent p-5 pr-4 hover:bg-destructive"
+          onClick={() => setMobileMenuOpen(false)}
+          className="inline-flex h-16 w-full items-center justify-end bg-destructive p-5 pr-4 hover:bg-primary hover:text-primary-foreground"
         >
           <h1 className="mr-2 text-2xl font-bold">Futy</h1>
           <Image src={ballLogo} width={30} height={30} alt="ball" />
@@ -43,7 +44,7 @@ export function Sidebar({ leagues }: SidebarProps) {
             ))}
         </nav>
       </div>
-      <div className="container sticky bottom-0 left-0 flex justify-between border-t bg-primary-foreground p-2 text-primary">
+      <div className="sticky bottom-0 left-0 flex w-full justify-between bg-primary-foreground text-primary">
         <ProfileButton />
         <ModeToggle />
       </div>
