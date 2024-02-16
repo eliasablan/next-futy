@@ -60,12 +60,11 @@ export default function StandingsCard({
                       <TableRow key={teamStanding.position}>
                         <TableCell>
                           <Link href={`/teams/${teamStanding.team.id}`}>
-                            <div className="flex h-6 justify-start">
+                            <div className="flex h-fit items-center justify-start pr-4">
                               {teamStanding.team.crest && (
                                 <Image
                                   src={teamStanding.team.crest}
                                   className="mr-2"
-                                  h-6
                                   width={22}
                                   height={22}
                                   alt={teamStanding.team.shortName}
@@ -122,7 +121,7 @@ export default function StandingsCard({
                               <Link
                                 href={`/teams/${teamStanding.team.id}`}
                               >
-                                <div className="flex h-6 justify-start">
+                                <div className="flex h-fit items-center justify-start pr-4">
                                   {teamStanding.team.crest && (
                                     <Image
                                       src={teamStanding.team.crest}
