@@ -25,10 +25,10 @@ export default async function LeaguesCard() {
   return (
     <Card className="h-fit">
       <Collapsible defaultOpen>
-        <CardHeader className="flex flex-row items-center justify-between py-3">
-          <CardTitle className="text-xl leading-none">Leagues</CardTitle>
-          <CollapsibleTrigger className="!mt-1">
-            <CaretSortIcon className="h-8 w-8" />
+        <CardHeader className="py-3">
+          <CollapsibleTrigger className="flex flex-row items-center justify-between">
+            <CardTitle className="text-xl">Leagues</CardTitle>
+            <CaretSortIcon className="h-6 w-6" />
           </CollapsibleTrigger>
         </CardHeader>
         <CollapsibleContent>

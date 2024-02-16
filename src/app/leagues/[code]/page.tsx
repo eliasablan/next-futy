@@ -18,7 +18,7 @@ export default async function LeaguePage({
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <h1 className="col-span-1 text-3xl font-semibold lg:col-span-2">
+      <h1 className="col-span-1 text-2xl font-semibold lg:col-span-2">
         {league.name}
       </h1>
       <MatchesCard matches={matches.matches} />
