@@ -14,6 +14,20 @@ export const fetchLeagues = async () => {
   return data.competitions
 }
 
+export const fetchLeague = async (code: string) => {
+  const league_url =
+    process.env.FOOTBALL_DATA_ORG_URL + 'competitions/' + code
+  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+
+  const res = await fetch(league_url, {
+    headers: {
+      'X-Auth-Token': auth_token,
+    },
+  })
+  const data = await res.json()
+  return data
+}
+
 export const fetchTeams = async ({ page = 1, limit = 12 }) => {
   const teams_url =
     process.env.FOOTBALL_DATA_ORG_URL +
@@ -49,12 +63,12 @@ export const fetchMatch = async (id: number) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(team_url, {
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
   })
   const data = await res.json()
-  console.log(data)
   return data
 }
 
@@ -65,7 +79,7 @@ export const fetchCompetitionStandings = async (code: string) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
@@ -81,7 +95,7 @@ export const fetchCompetitionMatches = async (code: string) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
@@ -97,7 +111,7 @@ export const fetchMatches = async (id: number) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
@@ -111,7 +125,7 @@ export const fetchDayMatches = async () => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(matches_url, {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },

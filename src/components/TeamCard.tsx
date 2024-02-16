@@ -21,9 +21,7 @@ export default async function TeamCard({ team }: { team: Team }) {
     <Card className="h-fit">
       <Collapsible defaultOpen>
         <CardHeader className="flex flex-row items-center justify-between py-3">
-          <CardTitle className="text-xl leading-none">
-            {team.shortName || team.name}
-          </CardTitle>
+          <CardTitle className="text-xl leading-none">About</CardTitle>
           <CollapsibleTrigger className="!mt-1">
             <CaretSortIcon className="h-8 w-8" />
           </CollapsibleTrigger>
