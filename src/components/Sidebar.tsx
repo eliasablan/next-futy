@@ -10,7 +10,7 @@ import { League } from '@/lib/types/league'
 import { MenuContext } from '@/components/MenuProvider'
 import { cn } from '@/lib/utils'
 import { ModeToggle } from './ThemeButton'
-import { ProfileButton } from './ProfileButton'
+// import { ProfileButton } from './ProfileButton'
 
 interface SidebarProps extends React.ComponentPropsWithoutRef<'div'> {
   className?: string
