@@ -25,16 +25,16 @@ export function SidebarLeagueLink(league: League) {
       <Link
         onClick={() => setMobileMenuOpen(false)}
         href={`/leagues/${league.code}`}
-        className="gap-x-3 px-3 antialiased"
+        className="gap-x-3 px-6 antialiased"
       >
         <Image
           src={league.emblem}
           alt={league.name}
           width={40}
           height={40}
-          className="absolute left-3"
+          className="absolute left-5"
         />
-        <p className="my-5 ml-12 w-full text-wrap text-base font-medium leading-tight tracking-wider lg:my-4">
+        <p className="my-5 ml-14 w-full text-wrap text-sm font-medium leading-tight tracking-wider lg:my-4">
           {league.name}
         </p>
       </Link>
