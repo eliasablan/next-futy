@@ -21,6 +21,7 @@ import {
   CollapsibleTrigger,
 } from './ui/collapsible'
 import { CaretSortIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 
 export default function StandingsCard({
   type,
@@ -58,19 +59,21 @@ export default function StandingsCard({
                     (teamStanding: LeagueStanding) => (
                       <TableRow key={teamStanding.position}>
                         <TableCell>
-                          <div className="flex h-6 justify-start">
-                            {teamStanding.team.crest && (
-                              <Image
-                                src={teamStanding.team.crest}
-                                className="mr-2"
-                                h-6
-                                width={22}
-                                height={22}
-                                alt={teamStanding.team.shortName}
-                              />
-                            )}
-                            {teamStanding.team.shortName}
-                          </div>
+                          <Link href={`/teams/${teamStanding.team.id}`}>
+                            <div className="flex h-6 justify-start">
+                              {teamStanding.team.crest && (
+                                <Image
+                                  src={teamStanding.team.crest}
+                                  className="mr-2"
+                                  h-6
+                                  width={22}
+                                  height={22}
+                                  alt={teamStanding.team.shortName}
+                                />
+                              )}
+                              {teamStanding.team.shortName}
+                            </div>
+                          </Link>
                         </TableCell>
                         <TableCell>{teamStanding.points}</TableCell>
                         <TableCell>{teamStanding.playedGames}</TableCell>
@@ -115,17 +118,23 @@ export default function StandingsCard({
                       {standing.table.map(
                         (teamStanding: LeagueStanding) => (
                           <TableRow key={teamStanding.position}>
-                            <TableCell className="flex w-40 px-2 font-medium">
-                              {teamStanding.team.crest && (
-                                <Image
-                                  src={teamStanding.team.crest}
-                                  className="mr-2"
-                                  width={22}
-                                  height={22}
-                                  alt="Team Crest"
-                                />
-                              )}
-                              {teamStanding.team.shortName}
+                            <TableCell>
+                              <Link
+                                href={`/teams/${teamStanding.team.id}`}
+                              >
+                                <div className="flex h-6 justify-start">
+                                  {teamStanding.team.crest && (
+                                    <Image
+                                      src={teamStanding.team.crest}
+                                      className="mr-2"
+                                      width={22}
+                                      height={22}
+                                      alt="Team Crest"
+                                    />
+                                  )}
+                                  {teamStanding.team.shortName}
+                                </div>
+                              </Link>
                             </TableCell>
                             <TableCell>{teamStanding.points}</TableCell>
                             <TableCell>

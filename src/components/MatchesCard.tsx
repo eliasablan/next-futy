@@ -22,6 +22,7 @@ import {
   CollapsibleTrigger,
 } from './ui/collapsible'
 import { CaretSortIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 
 export default function MatchesCard({
   matches,
@@ -39,10 +40,10 @@ export default function MatchesCard({
         </CardHeader>
         <CollapsibleContent>
           <CardContent className="border-t pt-3">
-            {matches.length === 0 && (
+            {(!matches || matches.length === 0) && (
               <p className="mx-2">No games in the current week</p>
             )}
-            {matches.length > 0 && (
+            {matches?.length > 0 && (
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -61,17 +62,19 @@ export default function MatchesCard({
                       )}
                     >
                       <TableCell>
-                        <div className="flex items-center justify-start font-medium">
-                          <Image
-                            src={match.homeTeam.crest}
-                            width={25}
-                            height={25}
-                            alt="Away Team Crest"
-                          />
-                          <span className="mx-2">
-                            {match.homeTeam.shortName}
-                          </span>
-                        </div>
+                        <Link href={`/teams/${match.id}`}>
+                          <div className="flex items-center justify-start font-medium">
+                            <Image
+                              src={match.homeTeam.crest}
+                              width={25}
+                              height={25}
+                              alt="Away Team Crest"
+                            />
+                            <span className="mx-2">
+                              {match.homeTeam.shortName}
+                            </span>
+                          </div>
+                        </Link>
                       </TableCell>
                       <TableCell className="text-center font-bold">
                         <p className="text-xs font-normal">
@@ -93,17 +96,19 @@ export default function MatchesCard({
                         </p>
                       </TableCell>
                       <TableCell>
-                        <div className="flex items-center justify-end font-medium">
-                          <span className="mx-2">
-                            {match.awayTeam.shortName}
-                          </span>
-                          <Image
-                            src={match.awayTeam.crest}
-                            width={25}
-                            height={25}
-                            alt="Away Team Crest"
-                          />
-                        </div>
+                        <Link href={`/teams/${match.id}`}>
+                          <div className="flex items-center justify-end font-medium">
+                            <span className="mx-2">
+                              {match.awayTeam.shortName}
+                            </span>
+                            <Image
+                              src={match.awayTeam.crest}
+                              width={25}
+                              height={25}
+                              alt="Away Team Crest"
+                            />
+                          </div>
+                        </Link>
                       </TableCell>
                     </TableRow>
                   ))}

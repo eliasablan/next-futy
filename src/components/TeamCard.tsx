@@ -38,12 +38,14 @@ export default async function TeamCard({ team }: { team: Team }) {
                 height={200}
               />
               <p className="inline-flex gap-3 pt-4 font-semibold">
-                <Image
-                  src={team.area.flag}
-                  alt={team.area.name}
-                  width={20}
-                  height={20}
-                />
+                {team.area?.flag && (
+                  <Image
+                    src={team.area.flag}
+                    alt={team.area.name}
+                    width={20}
+                    height={20}
+                  />
+                )}
                 {team.name}
               </p>
               <p className="pt-2">
