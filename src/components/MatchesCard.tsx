@@ -21,7 +21,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from './ui/collapsible'
-import { Button } from './ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 
 export default function MatchesCard({
@@ -35,10 +34,7 @@ export default function MatchesCard({
         <CardHeader className="flex flex-row items-center justify-between py-3">
           <CardTitle className="text-xl">Games</CardTitle>
           <CollapsibleTrigger className="!mt-1">
-            <Button variant="outline" size="icon" className="h-8 w-8">
-              <CaretSortIcon className="h-8 w-8" />
-              <span className="sr-only">Toggle</span>
-            </Button>
+            <CaretSortIcon className="h-8 w-8" />
           </CollapsibleTrigger>
         </CardHeader>
         <CollapsibleContent>

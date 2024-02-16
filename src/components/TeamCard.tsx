@@ -11,7 +11,6 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from './ui/collapsible'
-import { Button } from './ui/button'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 
 import Image from 'next/image'
@@ -26,10 +25,7 @@ export default async function TeamCard({ team }: { team: Team }) {
             {team.shortName || team.name}
           </CardTitle>
           <CollapsibleTrigger className="!mt-1">
-            <Button variant="outline" size="icon" className="h-8 w-8">
-              <CaretSortIcon className="h-8 w-8" />
-              <span className="sr-only">Toggle</span>
-            </Button>
+            <CaretSortIcon className="h-8 w-8" />
           </CollapsibleTrigger>
         </CardHeader>
         <CollapsibleContent>
