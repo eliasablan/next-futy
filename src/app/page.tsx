@@ -1,16 +1,19 @@
 import LeaguesCard from '@/components/LeaguesCard'
 import MatchesCard from '@/components/MatchesCard'
 import TeamsCard from '@/components/TeamsCard'
-import { SearchParams } from '@/lib/types/searchParams'
+
 import { fetchDayMatches } from '@/lib/data/queries'
 
+import { SearchParams } from '@/lib/types/searchParams'
+import { CardMatch } from '@/lib/types/match'
+
 const Home = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const matches = await fetchDayMatches()
+  const matches: CardMatch[] = await fetchDayMatches()
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <div className="grid h-fit gap-4">
-        <MatchesCard matches={matches.matches} />
+        <MatchesCard matches={matches} />
         <LeaguesCard />
       </div>
       <TeamsCard searchParams={searchParams} />

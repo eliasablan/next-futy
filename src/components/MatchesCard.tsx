@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn, formatearFecha } from '@/lib/utils'
-import { Match } from '@/lib/types/match'
+import { CardMatch } from '@/lib/types/match'
 import {
   Table,
   TableBody,
@@ -27,7 +27,7 @@ import Link from 'next/link'
 export default function MatchesCard({
   matches,
 }: {
-  matches?: Match[] | any
+  matches: CardMatch[] | any
 }) {
   return (
     <Card className="h-fit">
@@ -53,7 +53,7 @@ export default function MatchesCard({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {matches.map((match: Match) => (
+                  {matches.map((match: CardMatch) => (
                     <TableRow
                       key={match.id}
                       className={cn(
@@ -62,7 +62,7 @@ export default function MatchesCard({
                       )}
                     >
                       <TableCell>
-                        <Link href={`/teams/${match.id}`}>
+                        <Link href={`/teams/${match.homeTeam.id}`}>
                           <div className="flex items-center justify-start font-medium">
                             <Image
                               src={match.homeTeam.crest}
@@ -77,26 +77,28 @@ export default function MatchesCard({
                         </Link>
                       </TableCell>
                       <TableCell className="text-center font-bold">
-                        <p className="text-xs font-normal">
-                          {match.status === 'TIMED' &&
-                            formatearFecha(match.utcDate).split(' ')[1]}
-                          {match.status === 'IN_PLAY' && 'Live'}
-                          {match.status === 'PAUSED' && 'Pause'}
-                          {match.status === 'FINISHED' && 'FT'}
-                        </p>
-                        <p>
-                          {match.status === 'TIMED' &&
-                            formatearFecha(match.utcDate)
-                              .split(' ')[0]
-                              .substring(0, 5)}
-                          {match.status !== 'TIMED' &&
-                            match.score.fullTime.home +
-                              '-' +
-                              match.score.fullTime.away}
-                        </p>
+                        <Link href={`/match/${match.id}`}>
+                          <p className="text-xs font-normal">
+                            {match.status === 'TIMED' &&
+                              formatearFecha(match.utcDate).split(' ')[1]}
+                            {match.status === 'IN_PLAY' && 'Live'}
+                            {match.status === 'PAUSED' && 'Pause'}
+                            {match.status === 'FINISHED' && 'FT'}
+                          </p>
+                          <p>
+                            {match.status === 'TIMED' &&
+                              formatearFecha(match.utcDate)
+                                .split(' ')[0]
+                                .substring(0, 5)}
+                            {match.status !== 'TIMED' &&
+                              match.score.fullTime.home +
+                                '-' +
+                                match.score.fullTime.away}
+                          </p>
+                        </Link>
                       </TableCell>
                       <TableCell>
-                        <Link href={`/teams/${match.id}`}>
+                        <Link href={`/teams/${match.awayTeam.id}`}>
                           <div className="flex items-center justify-end font-medium">
                             <span className="mx-2">
                               {match.awayTeam.shortName}
