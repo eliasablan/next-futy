@@ -30,11 +30,11 @@ export function SidebarLeagueLink(league: League) {
         <Image
           src={league.emblem}
           alt={league.name}
-          width={40}
-          height={40}
-          className="absolute left-5"
+          width={30}
+          height={30}
+          className="absolute left-4"
         />
-        <p className="my-5 ml-14 w-full text-wrap text-sm font-medium leading-tight tracking-wider lg:my-4">
+        <p className="my-5 ml-8 w-full text-wrap text-sm font-medium leading-tight tracking-wider lg:my-4">
           {league.name}
         </p>
       </Link>

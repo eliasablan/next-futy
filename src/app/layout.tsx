@@ -30,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('min-h-svh lg:pl-72', inter.className)}>
+      <body className={cn('min-h-svh', inter.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -41,10 +41,8 @@ export default async function RootLayout({
             <Sidebar leagues={leagues} />
             <MobileHeader />
             <Header />
+            <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
           </MenuProvider>
-          <div className="mx-auto max-w-7xl gap-6 p-6 lg:pt-[88px]">
-            {children}
-          </div>
         </ThemeProvider>
         <Analytics />
       </body>

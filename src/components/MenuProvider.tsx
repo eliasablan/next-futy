@@ -8,7 +8,7 @@ function MenuProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <MenuContext.Provider value={{ mobileMenuOpen, setMobileMenuOpen }}>
-      {children}
+      <div className={mobileMenuOpen ? 'lg:pl-52' : ''}>{children}</div>
     </MenuContext.Provider>
   )
 }

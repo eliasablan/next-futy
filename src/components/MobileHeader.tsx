@@ -11,7 +11,7 @@ export function MobileHeader() {
     <>
       <header className="lg:hidden">
         <div className="flex h-16 items-center justify-between border-b p-6">
-          <Link href="/" className="focus:ring">
+          <Link href="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-10 w-10"
@@ -28,7 +28,7 @@ export function MobileHeader() {
             </svg>
           </Link>
           <Button
-            className="z-10 h-10 w-10 rounded-lg p-2 focus:ring"
+            className="z-10 h-10 w-10 rounded-lg p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg
