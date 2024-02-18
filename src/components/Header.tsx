@@ -11,16 +11,17 @@ import { Button } from './ui/button'
 export default function Header() {
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
   const pathname = usePathname()
-  console.log(mobileMenuOpen)
 
   return (
     <header className="sticky top-0 z-10 flex min-h-16 w-full items-center justify-between border-b bg-primary-foreground py-2 tracking-wider">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
+      <div
+        className={cn(
+          'mx-auto flex w-full max-w-7xl items-center justify-between px-6',
+          mobileMenuOpen && 'justify-end lg:justify-between'
+        )}
+      >
         <Button
-          className={cn(
-            'h-10 w-10 rounded-lg p-2',
-            mobileMenuOpen && 'z-60 fixed right-6 top-3'
-          )}
+          className="z-60 h-10 w-10 rounded-lg p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <svg
