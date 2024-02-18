@@ -18,7 +18,7 @@ export function SidebarLeagueLink(league: League) {
       variant="ghost"
       size="icon"
       className={cn(
-        'h-auto w-full rounded-none border-b px-4',
+        'h-auto min-h-16 w-full rounded-none border-b px-4',
         pathname === `/leagues/${league.code}` && 'border bg-accent'
       )}
     >

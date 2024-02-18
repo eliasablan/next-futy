@@ -1,18 +1,20 @@
 import React from 'react'
-import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+
 import { cn } from '@/lib/utils'
 
-import { MobileHeader } from '@/components/MobileHeader'
-import { Sidebar } from '@/components/Sidebar'
-import { MenuProvider } from '@/components/MenuProvider'
-import { ThemeProvider } from '@/components/theme-provider'
+import { Analytics } from '@vercel/analytics/react'
 
+import { ThemeProvider } from '@/components/theme-provider'
+import { MenuProvider } from '@/components/MenuProvider'
+
+import Header from '@/components/Header'
+
+import { Sidebar } from '@/components/Sidebar'
 import { fetchLeagues } from '@/lib/data/queries'
 import { League } from '@/lib/types/league'
-import Header from '@/components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,7 +41,6 @@ export default async function RootLayout({
         >
           <MenuProvider>
             <Sidebar leagues={leagues} />
-            <MobileHeader />
             <Header />
             <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
           </MenuProvider>

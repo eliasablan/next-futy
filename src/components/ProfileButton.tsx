@@ -17,7 +17,7 @@ export function ProfileButton() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-12 w-12 rounded-none"
+          className="h-16 w-16 rounded-none"
         >
           <PersonIcon className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">Profile options</span>
@@ -25,17 +25,17 @@ export function ProfileButton() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="h-30 border-2">
         <Link href="/profile">
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem className="px-6 py-4">
             Profile
           </DropdownMenuItem>
         </Link>
         <Link href="/profile">
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem className="px-6 py-4">
             Profile
           </DropdownMenuItem>
         </Link>
         <Link href="/profile">
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem className="px-6 py-4">
             Profile
           </DropdownMenuItem>
         </Link>

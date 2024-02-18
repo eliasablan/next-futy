@@ -55,7 +55,7 @@ export default function MatchesCard({
                       className="grid grid-cols-3"
                       style={{ textDecoration: 'none' }}
                     >
-                      <p className="flex items-center justify-end gap-2">
+                      <p className="flex items-center justify-end gap-2 text-ellipsis">
                         {match.homeTeam.name}
                         <Image
                           src={match.homeTeam.crest}
@@ -83,7 +83,7 @@ export default function MatchesCard({
                               match.score.fullTime.away}
                         </p>
                       </div>
-                      <p className="flex items-center justify-start gap-2">
+                      <p className="flex items-center justify-start gap-2 text-ellipsis">
                         <Image
                           src={match.awayTeam.crest}
                           width={25}

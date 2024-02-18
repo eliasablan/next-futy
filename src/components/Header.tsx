@@ -1,46 +1,80 @@
 'use client'
 import React, { useContext } from 'react'
+import { MenuContext } from './MenuProvider'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { Button } from './ui/button'
-import { MenuContext } from './MenuProvider'
 
 export default function Header() {
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
   const pathname = usePathname()
+  console.log(mobileMenuOpen)
 
   return (
-    <header className="sticky top-0 z-10 flex h-16 w-full items-center border-b bg-primary-foreground tracking-wider">
-      <div className="mx-auto w-full max-w-7xl px-6">
+    <header className="sticky top-0 z-10 flex min-h-16 w-full items-center justify-between border-b bg-primary-foreground py-2 tracking-wider">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6">
         <Button
-          variant="outline"
+          className={cn(
+            'h-10 w-10 rounded-lg p-2',
+            mobileMenuOpen && 'z-60 fixed right-6 top-3'
+          )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {!mobileMenuOpen ? '>' : '<'}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={cn('block', mobileMenuOpen && 'hidden')}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={cn('hidden', mobileMenuOpen && 'block')}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
         </Button>
 
-        <Button
-          variant={pathname !== '/games' ? 'link' : 'secondary'}
-          asChild
-        >
-          <Link href="/games">Games</Link>
-        </Button>
+        <div className={cn(mobileMenuOpen && 'hidden lg:block')}>
+          <Button
+            variant={pathname !== '/games' ? 'link' : 'secondary'}
+            asChild
+          >
+            <Link href="/games">Games</Link>
+          </Button>
 
-        <Button
-          variant={pathname !== '/leagues' ? 'link' : 'secondary'}
-          asChild
-        >
-          <Link href="/leagues">Leagues</Link>
-        </Button>
+          <Button
+            variant={pathname !== '/leagues' ? 'link' : 'secondary'}
+            asChild
+          >
+            <Link href="/leagues">Leagues</Link>
+          </Button>
 
-        <Button
-          variant={pathname !== '/teams' ? 'link' : 'secondary'}
-          asChild
-        >
-          <Link href="/teams">Teams</Link>
-        </Button>
+          <Button
+            variant={pathname !== '/teams' ? 'link' : 'secondary'}
+            asChild
+          >
+            <Link href="/teams">Teams</Link>
+          </Button>
+        </div>
       </div>
     </header>
   )

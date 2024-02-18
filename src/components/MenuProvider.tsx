@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, useState } from 'react'
 
-const MenuContext = createContext<any>(null)
+const MenuContext = createContext<boolean | any>(false)
 
 function MenuProvider({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
