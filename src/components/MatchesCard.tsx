@@ -1,5 +1,12 @@
-import React from 'react'
-import { cn, formatearFecha } from '@/lib/utils'
+'use client'
+import React, { useEffect } from 'react'
+import {
+  cn,
+  formatearFecha,
+  obtenerPrimerDiaSemana,
+  obtenerUltimoDiaSemana,
+} from '@/lib/utils'
+
 import { CardMatch } from '@/lib/types/match'
 import {
   Card,
@@ -7,25 +14,58 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import Image from 'next/image'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from './ui/collapsible'
-import { CaretSortIcon } from '@radix-ui/react-icons'
+} from '@/components/ui/collapsible'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from './ui/accordion'
+} from '@/components/ui/accordion'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+
+import { format } from 'date-fns'
+import { DateRange } from 'react-day-picker'
+
+import { CaretSortIcon, CalendarIcon } from '@radix-ui/react-icons'
+
+import Image from 'next/image'
+import Link from 'next/link'
+import { fetchMatches } from '@/lib/data/queries'
 
 export default function MatchesCard({
-  matches,
+  code,
+  team,
 }: {
-  matches: CardMatch[] | any
+  code?: string
+  team?: number
 }) {
+  const [isLoading, setIsLoading] = React.useState<boolean>(true)
+  const [matches, setMatches] = React.useState<CardMatch[] | []>([])
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
+    from: obtenerPrimerDiaSemana(new Date()),
+    to: obtenerUltimoDiaSemana(new Date()),
+  })
+
+  console.log(dateRange)
+
+  useEffect(() => {
+    fetchMatches(code, team, dateRange)
+      .then((res) => {
+        setMatches(res)
+      })
+      .then(() => setIsLoading(false))
+  }, [code, team, dateRange])
+
   return (
     <Card className="h-fit">
       <Collapsible defaultOpen>
@@ -37,11 +77,52 @@ export default function MatchesCard({
         </CardHeader>
         <CollapsibleContent>
           <CardContent className="border-t pt-3">
-            {(!matches || matches.length === 0) && (
-              <p className="mx-2">No games in the current week</p>
+            <div className="flex items-baseline justify-center gap-x-3 pb-3">
+              <p className="text-sm">Filter by date:</p>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    id="date"
+                    disabled={isLoading}
+                    variant={'outline'}
+                    className={cn(
+                      'justify-start text-left font-normal',
+                      !dateRange && 'text-muted-foreground'
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {dateRange?.from ? (
+                      dateRange.to ? (
+                        <>
+                          {format(dateRange.from, 'LLL dd, y')} -{' '}
+                          {format(dateRange.to, 'LLL dd, y')}
+                        </>
+                      ) : (
+                        format(dateRange.from, 'LLL dd, y')
+                      )
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="center">
+                  <Calendar
+                    initialFocus
+                    mode="range"
+                    defaultMonth={dateRange?.from}
+                    selected={dateRange}
+                    onSelect={setDateRange}
+                    numberOfMonths={2}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            {(!matches || matches.length === 0) && !isLoading && (
+              <p className="mx-2">No games in the range</p>
             )}
+            {isLoading && 'Loading matches...'}
             {matches?.length > 0 && (
-              <Accordion type="single" collapsible>
+              <Accordion type="single" collapsible className="border-t">
                 {matches.map((match: CardMatch) => (
                   <AccordionItem
                     key={match.id}
@@ -52,7 +133,7 @@ export default function MatchesCard({
                     )}
                   >
                     <AccordionTrigger
-                      className="grid grid-cols-3"
+                      className="grid grid-cols-3 py-2"
                       style={{ textDecoration: 'none' }}
                     >
                       <p className="flex items-center justify-end gap-2 text-ellipsis">
@@ -99,6 +180,12 @@ export default function MatchesCard({
                           {match.competition.name}
                         </p>
                         <p>Matchday #{match.season.currentMatchday}</p>
+                        <p>{format(match.utcDate, 'yyyy/MM/dd')}</p>
+                        <Button className="mx-auto" variant="link" asChild>
+                          <Link href={`/match/${match.id}`}>
+                            go to match page
+                          </Link>
+                        </Button>
                       </div>
                       {match.status === 'FINISHED' && (
                         <div className="grid grid-cols-2 pt-1">
@@ -118,78 +205,6 @@ export default function MatchesCard({
                   </AccordionItem>
                 ))}
               </Accordion>
-              // <Table>
-              //   <TableHeader>
-              //     <TableRow>
-              //       <TableHead className="text-left">Home</TableHead>
-              //       <TableHead className="text-center">Score</TableHead>
-              //       <TableHead className="text-right">Away</TableHead>
-              //     </TableRow>
-              //   </TableHeader>
-              //   <TableBody>
-              //     {matches.map((match: CardMatch) => (
-              //       <TableRow
-              //         key={match.id}
-              //         className={cn(
-              //           match.status === 'IN_PLAY' && 'bg-secondary',
-              //           match.status === 'PAUSED' && 'bg-destructive'
-              //         )}
-              //       >
-              //         <TableCell>
-              //           <Link href={`/teams/${match.homeTeam.id}`}>
-              //             <div className="flex items-center justify-start font-medium">
-              //               <Image
-              //                 src={match.homeTeam.crest}
-              //                 width={25}
-              //                 height={25}
-              //                 alt="Away Team Crest"
-              //               />
-              //               <span className="mx-2">
-              //                 {match.homeTeam.shortName}
-              //               </span>
-              //             </div>
-              //           </Link>
-              //         </TableCell>
-              //         <TableCell className="text-center font-bold">
-              //           <Link href={`/match/${match.id}`}>
-              //             <p className="text-xs font-normal">
-              // {match.status === 'TIMED' &&
-              //   formatearFecha(match.utcDate).split(' ')[1]}
-              // {match.status === 'IN_PLAY' && 'Live'}
-              // {match.status === 'PAUSED' && 'Pause'}
-              // {match.status === 'FINISHED' && 'FT'}
-              //             </p>
-              //             <p>
-              //               {match.status === 'TIMED' &&
-              //                 formatearFecha(match.utcDate)
-              //                   .split(' ')[0]
-              //                   .substring(0, 5)}
-              //               {match.status !== 'TIMED' &&
-              //                 match.score.fullTime.home +
-              //                   '-' +
-              //                   match.score.fullTime.away}
-              //             </p>
-              //           </Link>
-              //         </TableCell>
-              //         <TableCell>
-              //           <Link href={`/teams/${match.awayTeam.id}`}>
-              //             <div className="flex items-center justify-end font-medium">
-              //               <span className="mx-2">
-              //                 {match.awayTeam.shortName}
-              //               </span>
-              //               <Image
-              //                 src={match.awayTeam.crest}
-              //                 width={25}
-              //                 height={25}
-              //                 alt="Away Team Crest"
-              //               />
-              //             </div>
-              //           </Link>
-              //         </TableCell>
-              //       </TableRow>
-              //     ))}
-              //   </TableBody>
-              // </Table>
             )}
           </CardContent>
         </CollapsibleContent>

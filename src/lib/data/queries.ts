@@ -1,4 +1,6 @@
-import { obtenerSemanaActual } from '../utils'
+'use server'
+import { DateRange } from 'react-day-picker'
+import { formatearDateRange } from '../utils'
 
 export const fetchLeagues = async () => {
   const competitions_url =
@@ -88,40 +90,19 @@ export const fetchCompetitionStandings = async (code: string) => {
   return data
 }
 
-export const fetchCompetitionMatches = async (code: string) => {
-  const competition_url =
-    `${process.env.FOOTBALL_DATA_ORG_URL}competitions/${code}/matches?${obtenerSemanaActual()}` ||
-    ''
-  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+export const fetchMatches = async (
+  code: string | undefined,
+  team: number | undefined,
+  date: DateRange | undefined
+) => {
+  if (!process.env.FOOTBALL_DATA_ORG_URL) return []
 
-  const res = await fetch(competition_url, {
-    cache: 'no-store',
-    headers: {
-      'X-Auth-Token': auth_token,
-    },
-  })
-  const data = await res.json()
-  return data
-}
+  let matches_url = process.env.FOOTBALL_DATA_ORG_URL
+  if (code) matches_url += 'competitions/' + code
+  if (team) matches_url += 'teams/' + team
+  matches_url += '/matches?' + formatearDateRange(date)
+  console.log('matches_url', matches_url)
 
-export const fetchMatches = async (id: number) => {
-  const competition_url =
-    `${process.env.FOOTBALL_DATA_ORG_URL}teams/${id}/matches?${obtenerSemanaActual()}` ||
-    ''
-  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
-
-  const res = await fetch(competition_url, {
-    cache: 'no-store',
-    headers: {
-      'X-Auth-Token': auth_token,
-    },
-  })
-  const data = await res.json()
-  return data.matches
-}
-
-export const fetchDayMatches = async () => {
-  const matches_url = `${process.env.FOOTBALL_DATA_ORG_URL}matches` || ''
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(matches_url, {

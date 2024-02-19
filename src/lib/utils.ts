@@ -1,5 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { DateRange } from 'react-day-picker'
+import { addDays } from 'date-fns'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -23,6 +25,20 @@ export function formatearFecha(fechaISO: string): string {
   return fechaFormateada
 }
 
+export function formatearDateRange(date: DateRange | undefined): string {
+  if (!date) {
+    return `dateFrom=${new Date().toISOString().split('T')[0]}&dateTo=${addDays(new Date(), 1).toISOString().split('T')[0]}`
+  }
+  if (date.from && !date.to) {
+    return `dateFrom=${date.from.toISOString().split('T')[0]}&dateTo=${addDays(date.from, 1).toISOString().split('T')[0]}`
+  }
+
+  const fechaInicio = date.from?.toISOString().split('T')[0]
+  const fechaFin = date.to?.toISOString().split('T')[0]
+
+  return `dateFrom=${fechaInicio}&dateTo=${fechaFin}`
+}
+
 // Función para obtener la semana actual en formato de query string
 export function obtenerSemanaActual(): string {
   // Obtener la fecha actual
@@ -43,7 +59,7 @@ export function obtenerSemanaActual(): string {
 }
 
 // Función para obtener el primer día de la semana
-function obtenerPrimerDiaSemana(fecha: Date): Date {
+export function obtenerPrimerDiaSemana(fecha: Date): Date {
   const dia = fecha.getDay()
   const diferenciaDias = dia === 0 ? 6 : dia - 1
   const primerDiaSemana = new Date(
@@ -53,7 +69,7 @@ function obtenerPrimerDiaSemana(fecha: Date): Date {
 }
 
 // Función para obtener el último día de la semana
-function obtenerUltimoDiaSemana(fecha: Date): Date {
+export function obtenerUltimoDiaSemana(fecha: Date): Date {
   const dia = fecha.getDay()
   const diferenciaDias = dia === 0 ? 0 : 7 - dia
   const ultimoDiaSemana = new Date(
