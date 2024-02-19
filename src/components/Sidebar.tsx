@@ -26,8 +26,7 @@ export function Sidebar({ leagues }: SidebarProps) {
     <>
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-20 flex min-h-svh w-4/5 transform flex-col justify-between overflow-y-scroll border-r bg-primary-foreground text-primary transition duration-200 ease-out no-scrollbar xs:w-3/5 sm:w-1/2 lg:inset-0 lg:w-52',
-          // 'fixed inset-y-0 left-0 z-30 flex min-h-svh w-4/5 transform flex-col justify-between border-r transition duration-200 ease-out xs:w-3/5 sm:w-1/2 lg:inset-0 lg:w-52 lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-20 flex min-h-svh w-4/5 transform flex-col justify-between overflow-y-scroll border-r bg-primary-foreground text-primary transition duration-200 ease-out no-scrollbar xs:w-3/5 sm:w-1/2 lg:inset-0 lg:w-56',
           !mobileMenuOpen && '-translate-x-full'
         )}
       >
@@ -40,7 +39,7 @@ export function Sidebar({ leagues }: SidebarProps) {
             <h1 className="mr-2 text-2xl font-bold">Futy</h1>
             <Image src={ballLogo} width={30} height={30} alt="ball" />
           </Link>
-          <nav className="flex w-full flex-col items-center">
+          <nav className="flex w-full flex-col items-center divide-y">
             {leagues &&
               leagues.map((league) => (
                 <SidebarLeagueLink key={league.id} {...league} />
