@@ -1,20 +1,16 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-import { cn } from '@/lib/utils'
-
 import { Analytics } from '@vercel/analytics/react'
+import { cn } from '@/lib/utils'
+import { Inter } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { MenuProvider } from '@/components/MenuProvider'
 
 import Header from '@/components/Header'
-
-import { Sidebar } from '@/components/Sidebar'
-import { fetchLeagues } from '@/lib/data/queries'
-import { League } from '@/lib/types/league'
+import Sidebar from '@/components/Sidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,8 +24,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const leagues: League[] = await fetchLeagues()
-
   return (
     <html lang="en">
       <body className={cn('min-h-svh', inter.className)}>
@@ -40,7 +34,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <MenuProvider>
-            <Sidebar leagues={leagues} />
+            <Sidebar />
             <Header />
             <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
           </MenuProvider>
@@ -50,4 +44,3 @@ export default async function RootLayout({
     </html>
   )
 }
-// 64 + 24

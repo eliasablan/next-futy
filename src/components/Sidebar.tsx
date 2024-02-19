@@ -1,9 +1,11 @@
 'use client'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MenuContext } from '@/components/MenuProvider'
 import Link from 'next/link'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+
+import { fetchLeagues } from '@/lib/data/queries'
 
 import ballLogo from '../../public/ball.png'
 
@@ -14,13 +16,18 @@ import { ProfileButton } from './ProfileButton'
 
 import { League } from '@/lib/types/league'
 
-interface SidebarProps extends React.ComponentPropsWithoutRef<'div'> {
-  className?: string
-  leagues: League[]
-}
-
-export function Sidebar({ leagues }: SidebarProps) {
+export default function Sidebar() {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [leagues, setLeagues] = useState<League[]>([])
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
+
+  useEffect(() => {
+    fetchLeagues()
+      .then((res) => {
+        setLeagues(res)
+      })
+      .then(() => setIsLoading(false))
+  }, [])
 
   return (
     <>
@@ -40,10 +47,13 @@ export function Sidebar({ leagues }: SidebarProps) {
             <Image src={ballLogo} width={30} height={30} alt="ball" />
           </Link>
           <nav className="flex w-full flex-col items-center divide-y">
-            {leagues &&
+            {isLoading ? (
+              <p className="mt-6">Loading</p>
+            ) : (
               leagues.map((league) => (
                 <SidebarLeagueLink key={league.id} {...league} />
-              ))}
+              ))
+            )}
           </nav>
         </div>
         <div className="sticky bottom-0 left-0 flex min-h-16 w-full justify-between border-t bg-primary-foreground text-primary">
