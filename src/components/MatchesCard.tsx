@@ -56,8 +56,6 @@ export default function MatchesCard({
     to: obtenerUltimoDiaSemana(new Date()),
   })
 
-  console.log(dateRange)
-
   useEffect(() => {
     fetchMatches(code, team, dateRange)
       .then((res) => {
