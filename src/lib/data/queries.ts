@@ -2,6 +2,7 @@
 import { DateRange } from 'react-day-picker'
 import { formatearDateRange } from '../utils'
 import { LeagueStanding } from '../types/standing'
+import { Match, Matches } from '../types/match'
 
 export const fetchLeagues = async () => {
   const competitions_url =
@@ -61,36 +62,6 @@ export const fetchTeam = async (id: number) => {
   return data
 }
 
-export const fetchMatch = async (id: number) => {
-  const team_url = process.env.FOOTBALL_DATA_ORG_URL + 'matches/' + id
-  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
-
-  const res = await fetch(team_url, {
-    cache: 'no-store',
-    headers: {
-      'X-Auth-Token': auth_token,
-    },
-  })
-  const data = await res.json()
-  return data
-}
-
-export const fetchStandings = async (code: string) => {
-  const competition_url =
-    `${process.env.FOOTBALL_DATA_ORG_URL}competitions/${code}/standings` ||
-    ''
-  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
-
-  const res = await fetch(competition_url, {
-    cache: 'no-store',
-    headers: {
-      'X-Auth-Token': auth_token,
-    },
-  })
-  const data: LeagueStanding = await res.json()
-  return data
-}
-
 export const fetchMatches = async (
   code: string | undefined,
   team: number | undefined,
@@ -111,6 +82,36 @@ export const fetchMatches = async (
       'X-Auth-Token': auth_token,
     },
   })
-  const data = await res.json()
+  const data: Matches = await res.json()
   return data.matches
+}
+
+export const fetchMatch = async (id: number) => {
+  const team_url = process.env.FOOTBALL_DATA_ORG_URL + 'matches/' + id
+  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+
+  const res = await fetch(team_url, {
+    cache: 'no-store',
+    headers: {
+      'X-Auth-Token': auth_token,
+    },
+  })
+  const data: Match = await res.json()
+  return data
+}
+
+export const fetchStandings = async (code: string) => {
+  const competition_url =
+    `${process.env.FOOTBALL_DATA_ORG_URL}competitions/${code}/standings` ||
+    ''
+  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+
+  const res = await fetch(competition_url, {
+    cache: 'no-store',
+    headers: {
+      'X-Auth-Token': auth_token,
+    },
+  })
+  const data: LeagueStanding = await res.json()
+  return data
 }
