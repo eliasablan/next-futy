@@ -1,26 +1,39 @@
 export interface LeagueStanding {
-  position: number
-  team: StandingTeam
-  playedGames: number
-  form: any
-  won: number
-  draw: number
-  lost: number
-  points: number
-  goalsFor: number
-  goalsAgainst: number
-  goalDifference: number
+  filters: Filters
+  area: Area
+  competition: Competition
+  season: Season
+  standings: Standing[]
 }
 
-export interface StandingTeam {
+export interface Filters {
+  season: string
+}
+
+export interface Area {
   id: number
   name: string
-  shortName: string
-  tla: string
-  crest: string
+  code: string
+  flag: string
 }
 
-export interface CupGroup {
+export interface Competition {
+  id: number
+  name: string
+  code: string
+  type: string
+  emblem: string
+}
+
+export interface Season {
+  id: number
+  startDate: string
+  endDate: string
+  currentMatchday: number
+  winner: any
+}
+
+export interface Standing {
   stage: string
   type: string
   group: string
@@ -29,7 +42,7 @@ export interface CupGroup {
 
 export interface Table {
   position: number
-  team: GroupTeam
+  team: Team
   playedGames: number
   form: any
   won: number
@@ -41,7 +54,7 @@ export interface Table {
   goalDifference: number
 }
 
-export interface GroupTeam {
+export interface Team {
   id: number
   name: string
   shortName: string

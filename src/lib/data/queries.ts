@@ -1,6 +1,7 @@
 'use server'
 import { DateRange } from 'react-day-picker'
 import { formatearDateRange } from '../utils'
+import { LeagueStanding } from '../types/standing'
 
 export const fetchLeagues = async () => {
   const competitions_url =
@@ -74,7 +75,7 @@ export const fetchMatch = async (id: number) => {
   return data
 }
 
-export const fetchCompetitionStandings = async (code: string) => {
+export const fetchStandings = async (code: string) => {
   const competition_url =
     `${process.env.FOOTBALL_DATA_ORG_URL}competitions/${code}/standings` ||
     ''
@@ -86,7 +87,7 @@ export const fetchCompetitionStandings = async (code: string) => {
       'X-Auth-Token': auth_token,
     },
   })
-  const data = await res.json()
+  const data: LeagueStanding = await res.json()
   return data
 }
 
@@ -101,7 +102,6 @@ export const fetchMatches = async (
   if (code) matches_url += 'competitions/' + code
   if (team) matches_url += 'teams/' + team
   matches_url += '/matches?' + formatearDateRange(date)
-  console.log('matches_url', matches_url)
 
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
