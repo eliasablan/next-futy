@@ -75,7 +75,7 @@ export default function MatchesCard({
         </CardHeader>
         <CollapsibleContent>
           <CardContent className="border-t pt-3">
-            <div className="flex items-baseline justify-center gap-x-3 pb-3">
+            <div className="flex items-center justify-center gap-x-3 pb-3">
               <p className="text-sm">Filter by date:</p>
               <Popover>
                 <PopoverTrigger asChild>
