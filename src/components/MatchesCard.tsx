@@ -7,7 +7,7 @@ import {
   obtenerUltimoDiaSemana,
 } from '@/lib/utils'
 
-import { CardMatch } from '@/lib/types/match'
+import { Match } from '@/lib/types/match'
 import {
   Card,
   CardContent,
@@ -50,7 +50,7 @@ export default function MatchesCard({
   team?: number
 }) {
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
-  const [matches, setMatches] = React.useState<CardMatch[] | []>([])
+  const [matches, setMatches] = React.useState<Match[] | []>([])
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
     from: obtenerPrimerDiaSemana(new Date()),
     to: obtenerUltimoDiaSemana(new Date()),
@@ -121,7 +121,7 @@ export default function MatchesCard({
             {isLoading && 'Loading matches...'}
             {matches?.length > 0 && (
               <Accordion type="single" collapsible className="border-t">
-                {matches.map((match: CardMatch) => (
+                {matches.map((match: Match) => (
                   <AccordionItem
                     key={match.id}
                     value={match.id.toString()}
