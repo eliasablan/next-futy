@@ -22,8 +22,6 @@ import Link from 'next/link'
 
 export function ProfileButton() {
   const { data: session } = useSession()
-  console.log(session)
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
