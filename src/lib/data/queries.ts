@@ -3,6 +3,7 @@ import { DateRange } from 'react-day-picker'
 import { formatearDateRange } from '../utils'
 import { LeagueStanding } from '../types/standing'
 import { Match, Matches } from '../types/match'
+import { kv } from '@vercel/kv'
 
 export const fetchLeagues = async () => {
   const competitions_url =
@@ -114,4 +115,47 @@ export const fetchStandings = async (code: string) => {
   })
   const data: LeagueStanding = await res.json()
   return data
+}
+
+export const isFollowing = async (
+  type: string,
+  id: string,
+  session: any
+): Promise<boolean> => {
+  try {
+    return (
+      (await kv.sismember(
+        `user:${session.user.email}:following:${type}`,
+        id
+      )) === 1
+    )
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+export const followUnfollow = async (data: FormData, session: any) => {
+  try {
+    const action = data.get('action')
+    const type = data.get('type')
+    const id = data.get('id')
+    let kvres = null
+    if (action === 'follow') {
+      // seguir equipo
+      kvres = await kv.sadd(
+        `user:${session.user.email}:following:${type}`,
+        id
+      )
+    } else {
+      // dejar de seguir equipo
+      kvres = await kv.srem(
+        `user:${session.user.email}:following:${type}`,
+        id
+      )
+    }
+    return { ok: kvres === 1, action }
+  } catch (error) {
+    return { ok: false, error }
+  }
 }

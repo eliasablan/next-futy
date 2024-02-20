@@ -15,6 +15,7 @@ import { CaretSortIcon } from '@radix-ui/react-icons'
 
 import Image from 'next/image'
 import { Team } from '@/lib/types/team'
+import FollowButton from './FollowButton'
 
 export default async function TeamCard({ team }: { team: Team }) {
   return (
@@ -66,6 +67,7 @@ export default async function TeamCard({ team }: { team: Team }) {
                 <b>Foundation: </b>
                 {team.founded}
               </p>
+              <FollowButton type="teams" id={team.id.toString()} />
             </div>
           </CardContent>
         </CollapsibleContent>

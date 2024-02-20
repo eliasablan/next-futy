@@ -13,6 +13,7 @@ import { MenuProvider } from '@/components/MenuProvider'
 
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -46,6 +47,7 @@ export default async function RootLayout({
           </SessionProvider>
         </ThemeProvider>
         <Analytics />
+        <Toaster />
       </body>
     </html>
   )
