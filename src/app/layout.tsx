@@ -5,7 +5,9 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/lib/utils'
 import { Inter } from 'next/font/google'
+import { getServerSession } from 'next-auth'
 
+import SessionProvider from '@/lib/SessionProvider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { MenuProvider } from '@/components/MenuProvider'
 
@@ -24,6 +26,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await getServerSession()
+
+  console.log(session)
   return (
     <html lang="en">
       <body className={cn('min-h-svh', inter.className)}>
@@ -33,11 +38,13 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <MenuProvider>
-            <Sidebar />
-            <Header />
-            <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
-          </MenuProvider>
+          <SessionProvider session={session}>
+            <MenuProvider>
+              <Sidebar />
+              <Header />
+              <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
+            </MenuProvider>
+          </SessionProvider>
         </ThemeProvider>
         <Analytics />
       </body>

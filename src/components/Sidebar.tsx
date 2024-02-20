@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MenuContext } from '@/components/MenuProvider'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useSession, signIn } from 'next-auth/react'
+
 import { cn } from '@/lib/utils'
 
 import { fetchLeagues } from '@/lib/data/queries'
@@ -15,19 +17,23 @@ import { ModeToggle } from './ThemeButton'
 import { ProfileButton } from './ProfileButton'
 
 import { League } from '@/lib/types/league'
+import { Button } from './ui/button'
 
 export default function Sidebar() {
+  const { data: session } = useSession()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [leagues, setLeagues] = useState<League[]>([])
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
 
   useEffect(() => {
-    fetchLeagues()
-      .then((res) => {
-        setLeagues(res)
-      })
-      .then(() => setIsLoading(false))
-  }, [])
+    if (session) {
+      fetchLeagues()
+        .then((res) => {
+          setLeagues(res)
+        })
+        .then(() => setIsLoading(false))
+    }
+  }, [session])
 
   return (
     <>
@@ -47,16 +53,25 @@ export default function Sidebar() {
             <Image src={ballLogo} width={30} height={30} alt="ball" />
           </Link>
           <nav className="flex w-full flex-col items-center divide-y">
-            {isLoading ? (
-              <p className="mt-6">Loading</p>
+            {session ? (
+              isLoading ? (
+                <p className="mt-6">Loading</p>
+              ) : (
+                leagues.map((league) => (
+                  <SidebarLeagueLink key={league.id} {...league} />
+                ))
+              )
             ) : (
-              leagues.map((league) => (
-                <SidebarLeagueLink key={league.id} {...league} />
-              ))
+              <div className="mx-auto mt-8 text-center">
+                <p>Sigin for more</p>
+                <Button className="mt-4" onClick={() => signIn()}>
+                  Sign in
+                </Button>
+              </div>
             )}
           </nav>
         </div>
-        <div className="sticky bottom-0 left-0 flex min-h-16 w-full justify-between border-t bg-primary-foreground text-primary">
+        <div className="sticky bottom-0 left-0 flex h-auto w-full justify-between border-t bg-primary-foreground text-primary">
           <ProfileButton />
           <div></div>
           <ModeToggle />
