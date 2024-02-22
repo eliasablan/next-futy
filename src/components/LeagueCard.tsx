@@ -14,10 +14,10 @@ import {
 import { CaretSortIcon } from '@radix-ui/react-icons'
 
 import Image from 'next/image'
-import { Team } from '@/lib/types/team'
 import FollowButton from './FollowButton'
+import { League } from '@/lib/types/league'
 
-export default async function TeamCard({ team }: { team: Team }) {
+export default async function LeagueCard({ league }: { league: League }) {
   return (
     <Card className="h-fit">
       <Collapsible defaultOpen>
@@ -31,47 +31,27 @@ export default async function TeamCard({ team }: { team: Team }) {
           <CardContent className="border-t">
             <div className="flex flex-col items-center pt-4">
               <Image
-                src={team.crest}
-                alt={team.name}
+                src={league.emblem}
+                alt={league.name}
                 width={200}
                 height={200}
               />
               <p className="inline-flex gap-3 pt-4 font-semibold">
-                {team.area?.flag && (
+                {league.area?.flag && (
                   <Image
-                    src={team.area.flag}
-                    alt={team.area.name}
+                    src={league.area.flag}
+                    alt={league.area.name}
                     width={20}
                     height={20}
                   />
                 )}
-                {team.name}
-              </p>
-              <p className="pt-2">
-                {team.coach?.name && (
-                  <p>
-                    <b>Coach: </b>
-                    {team.coach.name}
-                  </p>
-                )}
-              </p>
-              <p className="pt-2">
-                {team.venue && (
-                  <p>
-                    <b>Stadium: </b>
-                    {team.venue}
-                  </p>
-                )}
-              </p>
-              <p className="pt-2">
-                <b>Foundation: </b>
-                {team.founded}
+                {league.name}
               </p>
               <FollowButton
-                type="teams"
-                id={team.id.toString()}
-                name={team.name}
-                emblem={team.crest}
+                type="leagues"
+                id={league.code}
+                name={league.name}
+                emblem={league.emblem}
               />
             </div>
           </CardContent>

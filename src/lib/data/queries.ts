@@ -126,11 +126,10 @@ export const isFollowing = async (
     return (
       (await kv.sismember(
         `user:${session.user.email}:following:${type}`,
-        id
+        id.toString()
       )) === 1
     )
   } catch (error) {
-    console.log(error)
     return false
   }
 }
@@ -138,8 +137,10 @@ export const isFollowing = async (
 export const followUnfollow = async (data: FormData, session: any) => {
   try {
     const action = data.get('action')
-    const type = data.get('type')
+    const type = data.get('element_type')
     const id = data.get('id')
+    const name = data.get('name')
+    const emblem = data.get('emblem')
     let kvres = null
     if (action === 'follow') {
       // seguir equipo
@@ -147,6 +148,12 @@ export const followUnfollow = async (data: FormData, session: any) => {
         `user:${session.user.email}:following:${type}`,
         id
       )
+      const existsInCache = await kv.exists(`data:${type}:${id}`)
+      if (existsInCache === 0) {
+        // actualizar datos
+        // @ts-ignore
+        storeFollowingData(type, id, name, emblem)
+      }
     } else {
       // dejar de seguir equipo
       kvres = await kv.srem(
@@ -155,6 +162,48 @@ export const followUnfollow = async (data: FormData, session: any) => {
       )
     }
     return { ok: kvres === 1, action }
+  } catch (error) {
+    return { ok: false, error }
+  }
+}
+
+export const storeFollowingData = async (
+  type: string,
+  id: string,
+  name: string,
+  emblem: string
+) => {
+  try {
+    const data = await kv.hset(`data:${type}:${id}`, {
+      link: `/${type}/${id}`,
+      name,
+      emblem,
+    })
+    return data
+  } catch (error) {
+    return { ok: false, error }
+  }
+}
+
+interface FollowingData {
+  ok: boolean
+  data?: {
+    link: string
+    name: string
+    emblem: string
+  }
+  error?: any
+}
+
+export const getFollowingData = async (
+  type: string,
+  id: string
+): Promise<FollowingData> => {
+  try {
+    const data = await kv.hgetall(`data:${type}:${id}`)
+
+    // @ts-ignore
+    return { ok: false, data }
   } catch (error) {
     return { ok: false, error }
   }

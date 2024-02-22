@@ -8,9 +8,13 @@ import { toast } from 'sonner'
 export default function FollowButton({
   type,
   id,
+  name,
+  emblem,
 }: {
   type: string
   id: string
+  name: string
+  emblem: string
 }) {
   const { data: session } = useSession()
   const [following, setIsFollowing] = useState<boolean>(false)
@@ -49,8 +53,15 @@ export default function FollowButton({
         name="action"
         value={following ? 'unfollow' : 'follow'}
       />
-      <input readOnly className="hidden" name="type" value={type} />
+      <input
+        readOnly
+        className="hidden"
+        name="element_type"
+        value={type}
+      />
       <input readOnly className="hidden" name="id" value={id} />
+      <input readOnly className="hidden" name="name" value={name} />
+      <input readOnly className="hidden" name="emblem" value={emblem} />
       {!isLoading ? (
         following ? (
           <Button variant="destructive" size="sm">
