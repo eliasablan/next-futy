@@ -1,36 +1,38 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { MenuContext } from '@/components/MenuProvider'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSession, signIn } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
-
-import { fetchLeagues } from '@/lib/data/queries'
+import { Button } from './ui/button'
 
 import ballLogo from '../../public/ball.png'
-
 import { SidebarLeagueLink } from './SidebarLeagueLink'
-
 import { ModeToggle } from './ThemeButton'
 import { ProfileButton } from './ProfileButton'
 
-import { League } from '@/lib/types/league'
-import { Button } from './ui/button'
+interface Followings {
+  teams: string[]
+  leagues: string[]
+  players: string[]
+}
 
 export default function Sidebar() {
   const { data: session } = useSession()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [leagues, setLeagues] = useState<League[]>([])
+  const [followings, setFollowings] = useState<Followings | null>(null)
+
   const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
 
   useEffect(() => {
     if (session) {
-      fetchLeagues()
-        .then((res) => {
-          setLeagues(res)
-        })
+      fetch(`/api/user/${session?.user?.email}`, {
+        next: { tags: ['follows'] },
+      })
+        .then((res) => res.json())
+        .then((data) => setFollowings(data))
         .then(() => setIsLoading(false))
     }
   }, [session])
@@ -57,9 +59,47 @@ export default function Sidebar() {
               isLoading ? (
                 <p className="mt-6">Loading</p>
               ) : (
-                leagues.map((league) => (
-                  <SidebarLeagueLink key={league.id} {...league} />
-                ))
+                <>
+                  {/* @ts-ignore */}
+                  {followings?.teams.length > 0 && (
+                    <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
+                      Teams
+                    </div>
+                  )}
+                  {followings?.teams.map((id: string) => (
+                    <SidebarLeagueLink
+                      key={`teams:${id}`}
+                      type="teams"
+                      id={id}
+                    />
+                  ))}
+                  {/* @ts-ignore */}
+                  {followings?.leagues.length > 0 && (
+                    <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
+                      Leagues
+                    </div>
+                  )}
+                  {followings?.leagues.map((code: string) => (
+                    <SidebarLeagueLink
+                      key={`leagues:${code}`}
+                      type="leagues"
+                      id={code}
+                    />
+                  ))}
+                  {/* @ts-ignore */}
+                  {followings?.players.length > 0 && (
+                    <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
+                      Players
+                    </div>
+                  )}
+                  {followings?.players.map((id: string) => (
+                    <SidebarLeagueLink
+                      key={`players:${id}`}
+                      type="players"
+                      id={id}
+                    />
+                  ))}
+                </>
               )
             ) : (
               <div className="mx-auto mt-8 text-center">
