@@ -103,7 +103,7 @@ export default function Sidebar() {
               )
             ) : (
               <div className="mx-auto mt-8 text-center">
-                <p>Sigin for more</p>
+                <p>Sign in for more</p>
                 <Button className="mt-4" onClick={() => signIn()}>
                   Sign in
                 </Button>
