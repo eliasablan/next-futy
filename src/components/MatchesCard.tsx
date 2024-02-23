@@ -146,7 +146,7 @@ export default function MatchesCard({
                       style={{ textDecoration: 'none' }}
                     >
                       <p className="flex items-center justify-end gap-2 text-ellipsis">
-                        {match.homeTeam.name}
+                        {match.homeTeam.shortName || match.homeTeam.name}
                         <Image
                           src={match.homeTeam.crest}
                           width={25}
@@ -180,7 +180,7 @@ export default function MatchesCard({
                           height={25}
                           alt="Away Team Crest"
                         />
-                        {match.awayTeam.name}
+                        {match.awayTeam.shortName || match.awayTeam.name}
                       </p>
                     </AccordionTrigger>
                     <AccordionContent className="flex flex-col bg-accent p-2 text-center text-accent-foreground">
