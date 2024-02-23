@@ -17,7 +17,6 @@ import {
 
 import { fetchTeams } from '@/lib/data/queries'
 
-import { CardTeam } from '@/lib/types/team'
 import { SearchParams } from '@/lib/types/searchParams'
 import {
   Collapsible,
@@ -33,7 +32,7 @@ export default async function TeamsCard({
 }) {
   const totalPages = 636
   const page = (searchParams.page || 1) as number
-  const { teams }: { teams: CardTeam[] } = await fetchTeams({ page })
+  const { ok, message, teams } = await fetchTeams({ page })
 
   return (
     <Card className="h-fit">
@@ -49,7 +48,8 @@ export default async function TeamsCard({
             {/* Table of teams */}
             <div className="relative">
               <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
-                {teams &&
+                {ok ? (
+                  teams &&
                   teams.map((team) => (
                     <Button
                       key={team.id}
@@ -78,7 +78,12 @@ export default async function TeamsCard({
                         </span>
                       </Link>
                     </Button>
-                  ))}
+                  ))
+                ) : (
+                  <div className="col-span-full text-center">
+                    {message}
+                  </div>
+                )}
               </div>
             </div>
             {/* Pagination */}

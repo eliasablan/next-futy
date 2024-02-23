@@ -1,9 +1,12 @@
 'use server'
 import { DateRange } from 'react-day-picker'
+import { kv } from '@vercel/kv'
+
 import { formatearDateRange } from '../utils'
+
 import { LeagueStanding } from '../types/standing'
 import { Match, Matches } from '../types/match'
-import { kv } from '@vercel/kv'
+import { CardTeam } from '../types/team'
 
 export const fetchLeagues = async () => {
   const competitions_url =
@@ -33,7 +36,18 @@ export const fetchLeague = async (code: string) => {
   return data
 }
 
-export const fetchTeams = async ({ page = 1, limit = 12 }) => {
+interface FetchTeamsData {
+  ok: boolean
+  teams?: CardTeam[]
+  offset?: number
+  code?: number
+  message?: string
+}
+
+export const fetchTeams = async ({
+  page = 1,
+  limit = 12,
+}): Promise<FetchTeamsData> => {
   const teams_url =
     process.env.FOOTBALL_DATA_ORG_URL +
     'teams/' +
@@ -47,7 +61,10 @@ export const fetchTeams = async ({ page = 1, limit = 12 }) => {
     },
   })
   const data = await res.json()
-  return { teams: data.teams, offset: data.filters.offset }
+  if (data.errorCode) {
+    return { ok: false, code: data.errorCode, message: data.message }
+  }
+  return { ok: true, teams: data.teams, offset: (page - 1) * limit }
 }
 
 export const fetchTeam = async (id: number) => {
