@@ -65,6 +65,7 @@ export default function MatchesCard({
         if (!res.ok) {
           setFetchError(res.message)
         } else {
+          setFetchError('')
           setMatches(res.matches || [])
         }
       })
