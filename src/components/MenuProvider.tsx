@@ -1,10 +1,15 @@
 'use client'
-import React, { createContext, useState } from 'react'
+import React, { createContext } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 
 const MenuContext = createContext<boolean | any>(false)
 
 function MenuProvider({ children }: { children: React.ReactNode }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useLocalStorage(
+    'mobile-menu-open',
+    true,
+    { initializeWithValue: false }
+  )
 
   return (
     <MenuContext.Provider value={{ mobileMenuOpen, setMobileMenuOpen }}>
