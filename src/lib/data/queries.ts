@@ -5,7 +5,7 @@ import { kv } from '@vercel/kv'
 import { formatearDateRange } from '../utils'
 
 import { LeagueStanding } from '../types/standing'
-import { Match, Matches } from '../types/match'
+import { Match } from '../types/match'
 import { CardTeam } from '../types/team'
 import { League } from '../types/league'
 
@@ -92,28 +92,41 @@ export const fetchTeam = async (id: number) => {
   return data
 }
 
+interface FetchMatchesData {
+  ok: boolean
+  matches?: Match[]
+  code?: number
+  message?: string
+}
+
 export const fetchMatches = async (
   code: string | undefined,
   team: number | undefined,
   date: DateRange | undefined
-) => {
-  if (!process.env.FOOTBALL_DATA_ORG_URL) return []
-
-  let matches_url = process.env.FOOTBALL_DATA_ORG_URL
-  if (code) matches_url += 'competitions/' + code
-  if (team) matches_url += 'teams/' + team
-  matches_url += '/matches?' + formatearDateRange(date)
+): Promise<FetchMatchesData> => {
+  let matches_url = process.env.FOOTBALL_DATA_ORG_URL || null
+  if (matches_url) {
+    if (code) matches_url += 'competitions/' + code
+    if (team) matches_url += 'teams/' + team
+    matches_url += '/matches?' + formatearDateRange(date)
+  }
 
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
-  const res = await fetch(matches_url, {
+  if (!matches_url) {
+    return { ok: false, code: 404, message: 'No API URL loaded' }
+  }
+  const res = await fetch(new URL(matches_url), {
     cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
   })
-  const data: Matches = await res.json()
-  return data.matches
+  const data = await res.json()
+  if (data.errorCode) {
+    return { ok: false, code: data.errorCode, message: data.message }
+  }
+  return { ok: true, matches: data.matches }
 }
 
 export const fetchMatch = async (id: number) => {

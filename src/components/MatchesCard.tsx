@@ -55,11 +55,18 @@ export default function MatchesCard({
     from: obtenerPrimerDiaSemana(new Date()),
     to: obtenerUltimoDiaSemana(new Date()),
   })
+  const [fetchError, setFetchError] = React.useState<string | undefined>(
+    ''
+  )
 
   useEffect(() => {
     fetchMatches(code, team, dateRange)
       .then((res) => {
-        setMatches(res)
+        if (!res.ok) {
+          setFetchError(res.message)
+        } else {
+          setMatches(res.matches || [])
+        }
       })
       .then(() => setIsLoading(false))
   }, [code, team, dateRange])
@@ -115,9 +122,12 @@ export default function MatchesCard({
                 </PopoverContent>
               </Popover>
             </div>
-            {(!matches || matches.length === 0) && !isLoading && (
-              <p className="mx-2">No games in the range</p>
+            {fetchError && (
+              <div className="col-span-full text-center">{fetchError}</div>
             )}
+            {(!matches || matches.length === 0) &&
+              !isLoading &&
+              !fetchError && <p className="mx-2">No games in the range</p>}
             {isLoading && 'Loading matches...'}
             {matches?.length > 0 && (
               <Accordion type="single" collapsible className="border-t">
