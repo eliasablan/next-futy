@@ -161,6 +161,7 @@ export default function MatchesCard({
                           {match.status === 'IN_PLAY' && 'Live'}
                           {match.status === 'PAUSED' && 'Pause'}
                           {match.status === 'FINISHED' && 'FT'}
+                          {match.status === 'POSTPONED' && 'POSTPONED'}
                         </p>
                         <p>
                           {match.status === 'TIMED' &&
@@ -168,6 +169,7 @@ export default function MatchesCard({
                               .split(' ')[0]
                               .substring(0, 5)}
                           {match.status !== 'TIMED' &&
+                            match.status !== 'POSTPONED' &&
                             match.score.fullTime.home +
                               '-' +
                               match.score.fullTime.away}
