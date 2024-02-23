@@ -1,15 +1,15 @@
 import React from 'react'
-import LeaguesCard from '@/components/LeaguesCard'
+import CompetitionsCard from '@/components/CompetitionsCard'
 
-const Leagues = () => {
+const Competitions = () => {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <h1 className="col-span-1 text-2xl font-semibold lg:col-span-2">
-        Leagues
+        Competitions
       </h1>
-      <LeaguesCard />
+      <CompetitionsCard />
     </div>
   )
 }
 
-export default Leagues
+export default Competitions

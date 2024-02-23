@@ -48,7 +48,6 @@ export default function Sidebar() {
         <div className="flex flex-1 flex-col items-center">
           <Link
             href="/"
-            onClick={() => setMobileMenuOpen(false)}
             className="sticky left-0 top-0 z-40 inline-flex h-16 w-full items-center justify-end bg-destructive p-5 pr-4 hover:bg-primary hover:text-primary-foreground"
           >
             <h1 className="mr-2 text-2xl font-bold">Futy</h1>

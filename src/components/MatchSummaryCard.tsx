@@ -34,7 +34,7 @@ export default async function MatchSummaryCard({
         <CollapsibleContent>
           <CardContent className="border-t">
             <div className="flex flex-col items-center pt-4">
-              <Link href={`/leagues/${match.competition.code}`}>
+              <Link href={`/competitions/${match.competition.code}`}>
                 <h3 className="text-xl font-bold">
                   {match.competition.name}
                 </h3>

@@ -1,4 +1,4 @@
-import LeaguesCard from '@/components/LeaguesCard'
+import LeaguesCard from '@/components/CompetitionsCard'
 import MatchesCard from '@/components/MatchesCard'
 import TeamsCard from '@/components/TeamsCard'
 

@@ -40,17 +40,17 @@ export default function Header() {
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={cn('hidden', mobileMenuOpen && 'block')}
             fill="none"
             viewBox="0 0 24 24"
+            strokeWidth="2.5"
             stroke="currentColor"
+            className={cn('hidden h-5 w-5', mobileMenuOpen && 'block')}
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
+              d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
+            />
           </svg>
         </Button>
 
@@ -63,10 +63,10 @@ export default function Header() {
           </Button>
 
           <Button
-            variant={pathname !== '/leagues' ? 'link' : 'secondary'}
+            variant={pathname !== '/competitions' ? 'link' : 'secondary'}
             asChild
           >
-            <Link href="/leagues">Leagues</Link>
+            <Link href="/competitions">Competitions</Link>
           </Button>
 
           <Button

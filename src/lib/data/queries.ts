@@ -7,20 +7,32 @@ import { formatearDateRange } from '../utils'
 import { LeagueStanding } from '../types/standing'
 import { Match, Matches } from '../types/match'
 import { CardTeam } from '../types/team'
+import { League } from '../types/league'
 
-export const fetchLeagues = async () => {
-  const competitions_url =
-    process.env.FOOTBALL_DATA_ORG_URL + 'competitions/' || ''
-  const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
-
-  const res = await fetch(competitions_url, {
-    headers: {
-      'X-Auth-Token': auth_token,
-    },
-  })
-  const data = await res.json()
-  return data.competitions
+interface FetchCompetitionsData {
+  ok: boolean
+  competitions?: League[]
+  code?: number
+  message?: string
 }
+
+export const fetchCompetitions =
+  async (): Promise<FetchCompetitionsData> => {
+    const competitions_url =
+      process.env.FOOTBALL_DATA_ORG_URL + 'competitions/' || ''
+    const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
+
+    const res = await fetch(competitions_url, {
+      headers: {
+        'X-Auth-Token': auth_token,
+      },
+    })
+    const data = await res.json()
+    if (data.errorCode) {
+      return { ok: false, code: data.errorCode, message: data.message }
+    }
+    return { ok: true, competitions: data.competitions }
+  }
 
 export const fetchLeague = async (code: string) => {
   const league_url =

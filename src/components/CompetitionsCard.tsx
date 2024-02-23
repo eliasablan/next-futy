@@ -1,6 +1,4 @@
 import React from 'react'
-import { League } from '@/lib/types/league'
-
 import {
   Card,
   CardHeader,
@@ -17,17 +15,17 @@ import { CaretSortIcon } from '@radix-ui/react-icons'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { fetchLeagues } from '@/lib/data/queries'
+import { fetchCompetitions } from '@/lib/data/queries'
 
-export default async function LeaguesCard() {
-  const leagues: League[] = await fetchLeagues()
+export default async function CompetitionsCard() {
+  const { ok, message, competitions } = await fetchCompetitions()
 
   return (
     <Card className="h-fit">
       <Collapsible defaultOpen>
         <CardHeader className="py-3">
           <CollapsibleTrigger className="flex flex-row items-center justify-between">
-            <CardTitle className="text-xl">Leagues</CardTitle>
+            <CardTitle className="text-xl">Competitions</CardTitle>
             <CaretSortIcon className="h-6 w-6" />
           </CollapsibleTrigger>
         </CardHeader>
@@ -35,10 +33,11 @@ export default async function LeaguesCard() {
           <CardContent className="border-t">
             <div className="relative">
               <div className="mx-auto mt-2 grid w-full grid-cols-2 justify-items-center gap-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
-                {leagues &&
-                  leagues.map((league) => (
+                {ok ? (
+                  competitions &&
+                  competitions.map((competition) => (
                     <Button
-                      key={league.id}
+                      key={competition.id}
                       asChild
                       variant="ghost"
                       size="icon"
@@ -46,22 +45,29 @@ export default async function LeaguesCard() {
                     >
                       <Link
                         className="flex flex-col text-center"
-                        href={`/leagues/${league.code}`}
+                        href={`/competitions/${competition.code}`}
                       >
-                        {league.emblem && (
+                        {competition.emblem && (
                           <Image
-                            src={league.emblem}
-                            alt={league.name}
+                            src={competition.emblem}
+                            alt={competition.name}
                             width={40}
                             height={40}
                           />
                         )}
                         <span className="mt-2 w-full overflow-hidden text-ellipsis text-wrap">
-                          {league.name ? league.name : 'Not found'}
+                          {competition.name
+                            ? competition.name
+                            : 'Not found'}
                         </span>
                       </Link>
                     </Button>
-                  ))}
+                  ))
+                ) : (
+                  <div className="col-span-full text-center">
+                    {message}
+                  </div>
+                )}
               </div>
             </div>
           </CardContent>
