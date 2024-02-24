@@ -18,8 +18,6 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar'
 
-import Link from 'next/link'
-
 export function ProfileButton() {
   const { data: session } = useSession()
   return (
@@ -46,13 +44,19 @@ export function ProfileButton() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56 border-2">
         <DropdownMenuLabel>
-          Hi, {session ? session.user?.name : 'My Account'}
+          {session ? 'Hi, ' + session.user?.name : 'My Account'}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
-          <Link target="_blank" href="github.com">
-            GitHub
-          </Link>
+        <DropdownMenuItem
+          onClick={() =>
+            window.open(
+              'https://github.com/eliasablan/next-futy',
+              '_blank'
+            )
+          }
+          className="cursor-pointer"
+        >
+          GitHub
         </DropdownMenuItem>
         <DropdownMenuItem disabled>Support</DropdownMenuItem>
         <DropdownMenuSeparator />

@@ -5,15 +5,15 @@ import { useLocalStorage } from 'usehooks-ts'
 const MenuContext = createContext<boolean | any>(false)
 
 function MenuProvider({ children }: { children: React.ReactNode }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useLocalStorage(
+  const [sidebarOpen, setSidebarOpen] = useLocalStorage(
     'mobile-menu-open',
     true,
     { initializeWithValue: false }
   )
 
   return (
-    <MenuContext.Provider value={{ mobileMenuOpen, setMobileMenuOpen }}>
-      <div className={mobileMenuOpen ? 'lg:pl-56' : ''}>{children}</div>
+    <MenuContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
+      <div className={sidebarOpen ? 'lg:pl-56' : ''}>{children}</div>
     </MenuContext.Provider>
   )
 }

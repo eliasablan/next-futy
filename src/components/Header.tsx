@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { Button } from './ui/button'
 
 export default function Header() {
-  const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
+  const { sidebarOpen, setSidebarOpen } = useContext(MenuContext)
   const pathname = usePathname()
 
   return (
@@ -17,16 +17,16 @@ export default function Header() {
       <div
         className={cn(
           'mx-auto flex w-full max-w-7xl items-center justify-between px-6',
-          mobileMenuOpen && 'justify-end lg:justify-between'
+          sidebarOpen && 'justify-end lg:justify-between'
         )}
       >
         <Button
           className="z-60 h-10 w-10 rounded-lg p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={cn('block', mobileMenuOpen && 'hidden')}
+            className={cn('block', sidebarOpen && 'hidden')}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -44,7 +44,7 @@ export default function Header() {
             viewBox="0 0 24 24"
             strokeWidth="2.5"
             stroke="currentColor"
-            className={cn('hidden h-5 w-5', mobileMenuOpen && 'block')}
+            className={cn('hidden h-5 w-5', sidebarOpen && 'block')}
           >
             <path
               strokeLinecap="round"
@@ -54,7 +54,7 @@ export default function Header() {
           </svg>
         </Button>
 
-        <div className={cn(mobileMenuOpen && 'hidden lg:block')}>
+        <div className={cn(sidebarOpen && 'hidden lg:block')}>
           <Button
             variant={pathname !== '/games' ? 'link' : 'secondary'}
             asChild

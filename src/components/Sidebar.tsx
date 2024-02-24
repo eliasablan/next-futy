@@ -24,7 +24,7 @@ export default function Sidebar() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [followings, setFollowings] = useState<Followings | null>(null)
 
-  const { mobileMenuOpen, setMobileMenuOpen } = useContext(MenuContext)
+  const { sidebarOpen, setSidebarOpen } = useContext(MenuContext)
 
   useEffect(() => {
     if (session) {
@@ -42,7 +42,7 @@ export default function Sidebar() {
       <aside
         className={cn(
           'fixed inset-y-0 left-0 z-20 flex min-h-svh w-4/5 transform flex-col justify-between overflow-y-scroll border-r bg-primary-foreground text-primary transition duration-200 ease-out no-scrollbar xs:w-3/5 sm:w-1/2 lg:inset-0 lg:w-56',
-          !mobileMenuOpen && '-translate-x-full'
+          !sidebarOpen && '-translate-x-full'
         )}
       >
         <div className="flex flex-1 flex-col items-center">
@@ -120,9 +120,9 @@ export default function Sidebar() {
       <div
         className={cn(
           'inset-0 z-10 bg-background opacity-70 no-scrollbar lg:hidden',
-          mobileMenuOpen ? 'fixed' : 'hidden'
+          sidebarOpen ? 'fixed' : 'hidden'
         )}
-        onClick={() => setMobileMenuOpen(false)}
+        onClick={() => setSidebarOpen(false)}
       />
     </>
   )
