@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { MenuContext } from '@/components/MenuProvider'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -13,29 +13,17 @@ import { SidebarLeagueLink } from './SidebarLeagueLink'
 import { ModeToggle } from './ThemeButton'
 import { ProfileButton } from './ProfileButton'
 
-interface Followings {
-  teams: string[]
-  leagues: string[]
-  players: string[]
-}
-
 export default function Sidebar() {
   const { data: session } = useSession()
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [followings, setFollowings] = useState<Followings | null>(null)
 
-  const { sidebarOpen, setSidebarOpen } = useContext(MenuContext)
-
-  useEffect(() => {
-    if (session) {
-      fetch(`/api/user/${session?.user?.email}`, {
-        next: { tags: ['follows'] },
-      })
-        .then((res) => res.json())
-        .then((data) => setFollowings(data))
-        .then(() => setIsLoading(false))
-    }
-  }, [session])
+  const {
+    sidebarOpen,
+    setSidebarOpen,
+    followings,
+    // setFollowings,
+    isLoading,
+    // setIsLoading,
+  } = useContext(MenuContext)
 
   return (
     <>
@@ -112,7 +100,6 @@ export default function Sidebar() {
         </div>
         <div className="sticky bottom-0 left-0 flex h-auto w-full justify-between border-t bg-primary-foreground text-primary">
           <ProfileButton />
-          <div></div>
           <ModeToggle />
         </div>
       </aside>

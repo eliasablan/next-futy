@@ -8,6 +8,7 @@ import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
 import { MenuContext } from './MenuProvider'
 import { getFollowingData } from '@/lib/data/queries'
+import { useLocalStorage } from 'usehooks-ts'
 
 interface ButtonData {
   link: string
@@ -22,16 +23,23 @@ export function SidebarLeagueLink({
   type: string
   id: string
 }) {
-  const [buttonData, setButtonData] = useState<ButtonData | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const { setMobileMenuOpen } = useContext(MenuContext)
+  const { setSidebarOpen } = useContext(MenuContext)
   const pathname = usePathname()
+  const [buttonData, setButtonData] = useLocalStorage<ButtonData | null>(
+    `button-${type}-${id}`,
+    null
+  )
 
   useEffect(() => {
-    getFollowingData(type, id)
-      .then((data) => setButtonData(data?.data || null))
-      .then(() => setIsLoading(false))
-  }, [id, type])
+    if (!buttonData) {
+      getFollowingData(type, id)
+        .then((data) => setButtonData(data?.data || null))
+        .then(() => setIsLoading(false))
+    } else {
+      setIsLoading(false)
+    }
+  }, [id, type, buttonData, setButtonData])
 
   if (isLoading || !buttonData) {
     return null
@@ -48,7 +56,7 @@ export function SidebarLeagueLink({
       )}
     >
       <Link
-        onClick={() => setMobileMenuOpen(false)}
+        onClick={() => setSidebarOpen(false)}
         href={buttonData.link}
         className="gap-x-3 px-6 antialiased"
       >
