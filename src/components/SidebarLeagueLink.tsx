@@ -55,11 +55,7 @@ export function SidebarLeagueLink({
         pathname === buttonData.link && 'border bg-accent'
       )}
     >
-      <Link
-        onClick={() => setSidebarOpen(false)}
-        href={buttonData.link}
-        className="gap-x-3 px-6 antialiased"
-      >
+      <Link href={buttonData.link} className="gap-x-3 px-6 antialiased">
         <Image
           src={buttonData.emblem}
           alt={buttonData.name}
