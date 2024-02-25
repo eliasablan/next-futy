@@ -1,9 +1,10 @@
 'use client'
 import { useContext } from 'react'
-import { MenuContext } from '@/components/MenuProvider'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSession, signIn } from 'next-auth/react'
+
+import { MenuContext } from '@/components/MenuProvider'
 
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
@@ -19,10 +20,8 @@ export default function Sidebar() {
   const {
     sidebarOpen,
     setSidebarOpen,
-    followings,
-    // setFollowings,
-    isLoading,
-    // setIsLoading,
+    sidebarFollowings,
+    sidebarLoading,
   } = useContext(MenuContext)
 
   return (
@@ -43,17 +42,17 @@ export default function Sidebar() {
           </Link>
           <nav className="flex w-full flex-col items-center divide-y">
             {session ? (
-              isLoading ? (
+              sidebarLoading ? (
                 <p className="mt-6">Loading</p>
               ) : (
                 <>
                   {/* @ts-ignore */}
-                  {followings?.teams.length > 0 && (
+                  {sidebarFollowings?.teams.length > 0 && (
                     <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
                       Teams
                     </div>
                   )}
-                  {followings?.teams.map((id: string) => (
+                  {sidebarFollowings?.teams.map((id: string) => (
                     <SidebarLeagueLink
                       key={`teams:${id}`}
                       type="teams"
@@ -61,12 +60,12 @@ export default function Sidebar() {
                     />
                   ))}
                   {/* @ts-ignore */}
-                  {followings?.leagues.length > 0 && (
+                  {sidebarFollowings?.leagues.length > 0 && (
                     <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
                       Leagues
                     </div>
                   )}
-                  {followings?.leagues.map((code: string) => (
+                  {sidebarFollowings?.leagues.map((code: string) => (
                     <SidebarLeagueLink
                       key={`leagues:${code}`}
                       type="leagues"
@@ -74,12 +73,12 @@ export default function Sidebar() {
                     />
                   ))}
                   {/* @ts-ignore */}
-                  {followings?.players.length > 0 && (
+                  {sidebarFollowings?.players.length > 0 && (
                     <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
                       Players
                     </div>
                   )}
-                  {followings?.players.map((id: string) => (
+                  {sidebarFollowings?.players.map((id: string) => (
                     <SidebarLeagueLink
                       key={`players:${id}`}
                       type="players"

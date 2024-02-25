@@ -1,9 +1,11 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useSession } from 'next-auth/react'
-import { isFollowing, followUnfollow } from '@/lib/data/queries'
-import { Button } from './ui/button'
 import { toast } from 'sonner'
+
+import { MenuContext } from './MenuProvider'
+import { kvIsFollowing, kvChangeFollowStatus } from '@/lib/data/queries'
+import { Button } from './ui/button'
 
 export default function FollowButton({
   type,
@@ -17,29 +19,31 @@ export default function FollowButton({
   emblem: string
 }) {
   const { data: session } = useSession()
-  const [following, setIsFollowing] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [following, setFollowing] = useState<boolean>(false)
+  const { setSidebarFollowings, setSidebarLoading, sidebarLoading } =
+    useContext(MenuContext)
 
   const submitClick = (data: FormData) => {
-    setIsLoading(true)
-    followUnfollow(data, session)
+    setSidebarLoading(true)
+    setSidebarFollowings(null)
+    kvChangeFollowStatus(data, session)
       .then((res) => {
-        setIsFollowing(res.action === 'follow')
+        setFollowing(res.action === 'follow')
         return res
       })
       .then((res) => {
-        setIsLoading(false)
+        setSidebarLoading(false)
         toast(res.action === 'follow' ? 'Followed' : 'Unfollowed')
       })
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    isFollowing(type, id, session).then((res) => {
-      setIsFollowing(res)
-      setIsLoading(false)
+    setSidebarLoading(true)
+    kvIsFollowing(type, id, session).then((res) => {
+      setFollowing(res)
+      setSidebarLoading(false)
     })
-  }, [type, id, session])
+  }, [type, id, session, setSidebarLoading])
 
   if (!session) {
     return null
@@ -62,9 +66,13 @@ export default function FollowButton({
       <input readOnly className="hidden" name="id" value={id} />
       <input readOnly className="hidden" name="name" value={name} />
       <input readOnly className="hidden" name="emblem" value={emblem} />
-      {!isLoading ? (
+      {!sidebarLoading ? (
         following ? (
-          <Button variant="destructive" size="sm">
+          <Button
+            onClick={() => localStorage.removeItem('followings')}
+            variant="destructive"
+            size="sm"
+          >
             <svg
               className="mr-2"
               width="15"

@@ -13,11 +13,9 @@ interface Followings {
 
 function MenuProvider({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession()
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [followings, setFollowings] = useLocalStorage<Followings | null>(
-    'followings',
-    null
-  )
+  const [sidebarLoading, setSidebarLoading] = useState<boolean>(true)
+  const [sidebarFollowings, setSidebarFollowings] =
+    useLocalStorage<Followings | null>('followings', null)
   const [sidebarOpen, setSidebarOpen] = useLocalStorage(
     'mobile-menu-open',
     true,
@@ -26,26 +24,26 @@ function MenuProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (session) {
-      if (!followings) {
+      if (!sidebarFollowings) {
         fetch(`/api/user/${session?.user?.email}`)
           .then((res) => res.json())
-          .then((data) => setFollowings(data))
-          .then(() => setIsLoading(false))
+          .then((data) => setSidebarFollowings(data))
+          .then(() => setSidebarLoading(false))
       } else {
-        setIsLoading(false)
+        setSidebarLoading(false)
       }
     }
-  }, [session, followings, setFollowings])
+  }, [session, sidebarFollowings, setSidebarFollowings])
 
   return (
     <MenuContext.Provider
       value={{
         sidebarOpen,
         setSidebarOpen,
-        followings,
-        setFollowings,
-        isLoading,
-        setIsLoading,
+        sidebarFollowings,
+        setSidebarFollowings,
+        sidebarLoading,
+        setSidebarLoading,
       }}
     >
       <div className={sidebarOpen ? 'lg:pl-56' : ''}>{children}</div>

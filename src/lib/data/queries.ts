@@ -159,7 +159,7 @@ export const fetchStandings = async (code: string) => {
   return data
 }
 
-export const isFollowing = async (
+export const kvIsFollowing = async (
   type: string,
   id: string,
   session: any
@@ -176,7 +176,10 @@ export const isFollowing = async (
   }
 }
 
-export const followUnfollow = async (data: FormData, session: any) => {
+export const kvChangeFollowStatus = async (
+  data: FormData,
+  session: any
+) => {
   try {
     const action = data.get('action')
     const type = data.get('element_type')

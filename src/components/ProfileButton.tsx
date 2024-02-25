@@ -1,8 +1,10 @@
 'use client'
-import React from 'react'
+import { useContext } from 'react'
+
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { PersonIcon } from '@radix-ui/react-icons'
 
+import { MenuContext } from './MenuProvider'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -20,6 +22,15 @@ import {
 
 export function ProfileButton() {
   const { data: session } = useSession()
+  const { setSidebarFollowings } = useContext(MenuContext)
+
+  const signOutAndCleanLocalStorage = () => {
+    return () => {
+      setSidebarFollowings(null)
+      signOut()
+    }
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -61,7 +72,7 @@ export function ProfileButton() {
         <DropdownMenuItem disabled>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
         {session ? (
-          <DropdownMenuItem onClick={() => signOut()}>
+          <DropdownMenuItem onClick={signOutAndCleanLocalStorage()}>
             Sign out
             <svg
               className="absolute right-2"
