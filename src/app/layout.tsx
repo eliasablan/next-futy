@@ -15,6 +15,7 @@ import Sidebar from '@/components/Sidebar'
 
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/sonner'
+import Followings from '@/components/sidebar/Followings'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,7 +42,9 @@ export default async function RootLayout({
         >
           <SessionProvider session={session}>
             <SidebarProvider>
-              <Sidebar />
+              <Sidebar>
+                <Followings />
+              </Sidebar>
               <Header />
               <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
             </SidebarProvider>

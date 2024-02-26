@@ -20,7 +20,7 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar'
 
-import { useSidebarContext } from '../contexts/SidebarPrivader'
+import { useSidebarContext } from '../../contexts/SidebarPrivader'
 
 export function ProfileButton() {
   const { data: session } = useSession()

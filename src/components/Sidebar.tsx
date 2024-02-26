@@ -6,23 +6,21 @@ import Image from 'next/image'
 import { useSession, signIn } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 
-import { SidebarItem } from './SidebarItem'
-import { ModeToggle } from './ThemeButton'
-import { ProfileButton } from './ProfileButton'
+import { ModeToggle } from '@/components/sidebar/ThemeButton'
+import { ProfileButton } from '@/components/sidebar/ProfileButton'
 
 import { useSidebarContext } from '@/contexts/SidebarPrivader'
 
-export default function Sidebar() {
+export default function Sidebar({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const { data: session } = useSession()
 
-  const {
-    sidebarOpen,
-    setSidebarOpen,
-    sidebarFollowings,
-    sidebarLoading,
-  } = useSidebarContext()
+  const { sidebarOpen, setSidebarOpen } = useSidebarContext()
 
   return (
     <>
@@ -42,51 +40,7 @@ export default function Sidebar() {
           </Link>
           <nav className="flex w-full flex-col items-center divide-y">
             {session ? (
-              sidebarLoading ? (
-                <p className="mt-6">Loading</p>
-              ) : (
-                <>
-                  {/* @ts-ignore */}
-                  {sidebarFollowings?.teams.length > 0 && (
-                    <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
-                      Teams
-                    </div>
-                  )}
-                  {sidebarFollowings?.teams.map((id: string) => (
-                    <SidebarItem
-                      key={`teams:${id}`}
-                      type="teams"
-                      id={id}
-                    />
-                  ))}
-                  {/* @ts-ignore */}
-                  {sidebarFollowings?.leagues.length > 0 && (
-                    <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
-                      Leagues
-                    </div>
-                  )}
-                  {sidebarFollowings?.leagues.map((code: string) => (
-                    <SidebarItem
-                      key={`leagues:${code}`}
-                      type="leagues"
-                      id={code}
-                    />
-                  ))}
-                  {/* @ts-ignore */}
-                  {sidebarFollowings?.players.length > 0 && (
-                    <div className="w-full bg-secondary-foreground py-2 text-center text-sm text-secondary">
-                      Players
-                    </div>
-                  )}
-                  {sidebarFollowings?.players.map((id: string) => (
-                    <SidebarItem
-                      key={`players:${id}`}
-                      type="players"
-                      id={id}
-                    />
-                  ))}
-                </>
-              )
+              children
             ) : (
               <div className="mx-auto mt-8 text-center">
                 <p>Sign in for more</p>

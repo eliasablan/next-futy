@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useLocalStorage } from 'usehooks-ts'
 
 import { cn } from '@/lib/utils'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
 import { getFollowingData } from '@/lib/actions'
 
