@@ -118,7 +118,7 @@ export const fetchMatches = async (
     return { ok: false, code: 404, message: 'No API URL loaded' }
   }
   const res = await fetch(new URL(matches_url), {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
@@ -135,7 +135,7 @@ export const fetchMatch = async (id: number) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(team_url, {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
@@ -151,7 +151,7 @@ export const fetchStandings = async (code: string) => {
   const auth_token = process.env.FOOTBALL_DATA_ORG_API_KEY || ''
 
   const res = await fetch(competition_url, {
-    // cache: 'no-store',
+    cache: 'no-store',
     headers: {
       'X-Auth-Token': auth_token,
     },
