@@ -22,7 +22,7 @@ type User = {
 
 async function getData(session: { user: User }): Promise<DataFetch> {
   const res = await fetch(
-    `${process.env.VERCEL_URL}/api/user/${session.user.email}`
+    `https://futy.vercel.app/api/user/${session.user.email}`
   )
   if (!res.ok) {
     throw new Error('Failed to fetch data')
