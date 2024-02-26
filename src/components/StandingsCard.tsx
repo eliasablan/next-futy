@@ -23,7 +23,7 @@ import {
 } from './ui/collapsible'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
-import { fetchStandings } from '@/lib/data/queries'
+import { fetchStandings } from '@/lib/actions'
 
 export default function StandingsCard({ code }: { code: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(true)

@@ -15,7 +15,7 @@ import { CaretSortIcon } from '@radix-ui/react-icons'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { fetchCompetitions } from '@/lib/data/queries'
+import { fetchCompetitions } from '@/lib/actions'
 
 export default async function CompetitionsCard() {
   const { ok, message, competitions } = await fetchCompetitions()

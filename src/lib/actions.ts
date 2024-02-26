@@ -1,13 +1,14 @@
 'use server'
+
 import { DateRange } from 'react-day-picker'
 import { kv } from '@vercel/kv'
 
-import { formatearDateRange } from '../utils'
+import { formatearDateRange } from './utils'
 
-import { LeagueStanding } from '../types/standing'
-import { Match } from '../types/match'
-import { CardTeam } from '../types/team'
-import { League } from '../types/league'
+import { LeagueStanding } from './types/standing'
+import { Match } from './types/match'
+import { CardTeam } from './types/team'
+import { League } from './types/league'
 
 interface FetchCompetitionsData {
   ok: boolean

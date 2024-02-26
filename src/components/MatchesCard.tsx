@@ -40,7 +40,7 @@ import { CaretSortIcon, CalendarIcon } from '@radix-ui/react-icons'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { fetchMatches } from '@/lib/data/queries'
+import { fetchMatches } from '@/lib/actions'
 
 export default function MatchesCard({
   code,

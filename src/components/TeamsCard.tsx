@@ -15,7 +15,7 @@ import {
   PaginationPrevious,
 } from './ui/pagination'
 
-import { fetchTeams } from '@/lib/data/queries'
+import { fetchTeams } from '@/lib/actions'
 
 import { SearchParams } from '@/lib/types/searchParams'
 import {

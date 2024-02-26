@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchLeague } from '@/lib/data/queries'
+import { fetchLeague } from '@/lib/actions'
 import StandingsCard from '@/components/StandingsCard'
 import MatchesCard from '@/components/MatchesCard'
 import LeagueCard from '@/components/LeagueCard'

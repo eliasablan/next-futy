@@ -3,7 +3,7 @@ import TeamCard from '@/components/TeamCard'
 import MatchesCard from '@/components/MatchesCard'
 import PlayersCard from '@/components/PlayersCard'
 
-import { fetchTeam } from '@/lib/data/queries'
+import { fetchTeam } from '@/lib/actions'
 import { Team } from '@/lib/types/team'
 
 const TeamPage = async ({ params }: { params: { id: number } }) => {

@@ -1,18 +1,18 @@
 'use client'
-import { useContext } from 'react'
+
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSession, signIn } from 'next-auth/react'
 
-import { MenuContext } from '@/components/MenuProvider'
-
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 
-import ballLogo from '../../public/ball.png'
-import { SidebarLeagueLink } from './SidebarLeagueLink'
+import { SidebarItem } from './SidebarItem'
 import { ModeToggle } from './ThemeButton'
 import { ProfileButton } from './ProfileButton'
+
+import { useSidebarContext } from '@/contexts/SidebarPrivader'
 
 export default function Sidebar() {
   const { data: session } = useSession()
@@ -22,7 +22,7 @@ export default function Sidebar() {
     setSidebarOpen,
     sidebarFollowings,
     sidebarLoading,
-  } = useContext(MenuContext)
+  } = useSidebarContext()
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function Sidebar() {
             className="sticky left-0 top-0 z-40 inline-flex h-16 w-full items-center justify-end bg-destructive p-5 pr-4 hover:bg-primary hover:text-primary-foreground"
           >
             <h1 className="mr-2 text-2xl font-bold">Futy</h1>
-            <Image src={ballLogo} width={30} height={30} alt="ball" />
+            <Image src={'/ball.png'} width={30} height={30} alt="ball" />
           </Link>
           <nav className="flex w-full flex-col items-center divide-y">
             {session ? (
@@ -53,7 +53,7 @@ export default function Sidebar() {
                     </div>
                   )}
                   {sidebarFollowings?.teams.map((id: string) => (
-                    <SidebarLeagueLink
+                    <SidebarItem
                       key={`teams:${id}`}
                       type="teams"
                       id={id}
@@ -66,7 +66,7 @@ export default function Sidebar() {
                     </div>
                   )}
                   {sidebarFollowings?.leagues.map((code: string) => (
-                    <SidebarLeagueLink
+                    <SidebarItem
                       key={`leagues:${code}`}
                       type="leagues"
                       id={code}
@@ -79,7 +79,7 @@ export default function Sidebar() {
                     </div>
                   )}
                   {sidebarFollowings?.players.map((id: string) => (
-                    <SidebarLeagueLink
+                    <SidebarItem
                       key={`players:${id}`}
                       type="players"
                       id={id}

@@ -1,15 +1,16 @@
 'use client'
-import React, { useContext } from 'react'
-import { MenuContext } from './MenuProvider'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
 
+import React from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
+import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 
+import { useSidebarContext } from '@/contexts/SidebarPrivader'
+
 export default function Header() {
-  const { sidebarOpen, setSidebarOpen } = useContext(MenuContext)
+  const { sidebarOpen, setSidebarOpen } = useSidebarContext()
   const pathname = usePathname()
 
   return (

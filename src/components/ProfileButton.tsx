@@ -1,10 +1,10 @@
 'use client'
-import { useContext } from 'react'
 
+import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
+
 import { PersonIcon } from '@radix-ui/react-icons'
 
-import { MenuContext } from './MenuProvider'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -20,9 +20,11 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar'
 
+import { useSidebarContext } from '../contexts/SidebarPrivader'
+
 export function ProfileButton() {
   const { data: session } = useSession()
-  const { setSidebarFollowings } = useContext(MenuContext)
+  const { setSidebarFollowings } = useSidebarContext()
 
   const signOutAndCleanLocalStorage = () => {
     return () => {

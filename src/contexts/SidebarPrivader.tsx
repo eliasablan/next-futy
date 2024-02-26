@@ -1,25 +1,44 @@
 'use client'
-import React, { useState, useEffect, createContext } from 'react'
+
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+} from 'react'
 import { useSession } from 'next-auth/react'
 import { useLocalStorage } from 'usehooks-ts'
 
-const MenuContext = createContext<boolean | any>(false)
+type SidebarContextType = {
+  sidebarOpen: boolean
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+  sidebarFollowings: Followings | null
+  setSidebarFollowings: React.Dispatch<
+    React.SetStateAction<Followings | null>
+  >
+  sidebarLoading: boolean
+  setSidebarLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-interface Followings {
+type Followings = {
   teams: string[]
   leagues: string[]
   players: string[]
 }
 
-function MenuProvider({ children }: { children: React.ReactNode }) {
+const SidebarContext = createContext<SidebarContextType | null>(null)
+
+function SidebarProvider({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession()
+
   const [sidebarLoading, setSidebarLoading] = useState<boolean>(true)
+
   const [sidebarFollowings, setSidebarFollowings] =
     useLocalStorage<Followings | null>('followings', null)
-  const [sidebarOpen, setSidebarOpen] = useLocalStorage(
+
+  const [sidebarOpen, setSidebarOpen] = useLocalStorage<boolean>(
     'mobile-menu-open',
-    true,
-    { initializeWithValue: false }
+    true
   )
 
   useEffect(() => {
@@ -36,7 +55,7 @@ function MenuProvider({ children }: { children: React.ReactNode }) {
   }, [session, sidebarFollowings, setSidebarFollowings])
 
   return (
-    <MenuContext.Provider
+    <SidebarContext.Provider
       value={{
         sidebarOpen,
         setSidebarOpen,
@@ -47,8 +66,18 @@ function MenuProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       <div className={sidebarOpen ? 'lg:pl-56' : ''}>{children}</div>
-    </MenuContext.Provider>
+    </SidebarContext.Provider>
   )
 }
 
-export { MenuContext, MenuProvider }
+function useSidebarContext() {
+  const context = useContext(SidebarContext)
+  if (!context) {
+    throw new Error(
+      'useSidebarContext must be used within a SidebarContext'
+    )
+  }
+  return context
+}
+
+export { SidebarProvider, useSidebarContext }

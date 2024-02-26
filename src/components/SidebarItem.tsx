@@ -1,14 +1,15 @@
 'use client'
-import { useContext, useEffect, useState } from 'react'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Button } from './ui/button'
+import { useLocalStorage } from 'usehooks-ts'
 
 import { cn } from '@/lib/utils'
-import { MenuContext } from './MenuProvider'
-import { getFollowingData } from '@/lib/data/queries'
-import { useLocalStorage } from 'usehooks-ts'
+import { Button } from './ui/button'
+
+import { getFollowingData } from '@/lib/actions'
 
 interface ButtonData {
   link: string
@@ -16,15 +17,8 @@ interface ButtonData {
   emblem: string
 }
 
-export function SidebarLeagueLink({
-  type,
-  id,
-}: {
-  type: string
-  id: string
-}) {
+export function SidebarItem({ type, id }: { type: string; id: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const { setSidebarOpen } = useContext(MenuContext)
   const pathname = usePathname()
   const [buttonData, setButtonData] = useLocalStorage<ButtonData | null>(
     `button-${type}-${id}`,

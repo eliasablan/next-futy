@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchMatch } from '@/lib/data/queries'
+import { fetchMatch } from '@/lib/actions'
 import MatchSummaryCard from '@/components/MatchSummaryCard'
 
 const MatchPage = async ({ params }: { params: { id: number } }) => {

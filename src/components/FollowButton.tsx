@@ -1,11 +1,13 @@
 'use client'
-import { useEffect, useState, useContext } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
-import { MenuContext } from './MenuProvider'
-import { kvIsFollowing, kvChangeFollowStatus } from '@/lib/data/queries'
 import { Button } from './ui/button'
+
+import { useSidebarContext } from '@/contexts/SidebarPrivader'
+import { kvIsFollowing, kvChangeFollowStatus } from '@/lib/actions'
 
 export default function FollowButton({
   type,
@@ -21,7 +23,7 @@ export default function FollowButton({
   const { data: session } = useSession()
   const [following, setFollowing] = useState<boolean>(false)
   const { setSidebarFollowings, setSidebarLoading, sidebarLoading } =
-    useContext(MenuContext)
+    useSidebarContext()
 
   const submitClick = (data: FormData) => {
     setSidebarLoading(true)

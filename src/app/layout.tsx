@@ -2,17 +2,18 @@ import React from 'react'
 import type { Metadata } from 'next'
 import './globals.css'
 
-import { Analytics } from '@vercel/analytics/react'
-import { cn } from '@/lib/utils'
 import { Inter } from 'next/font/google'
 import { getServerSession } from 'next-auth'
+import { Analytics } from '@vercel/analytics/react'
 
-import SessionProvider from '@/lib/SessionProvider'
-import { ThemeProvider } from '@/components/theme-provider'
-import { MenuProvider } from '@/components/MenuProvider'
+import { ThemeProvider } from '@/contexts/ThemeProvider'
+import { SessionProvider } from '@/contexts/SessionProvider'
+import { SidebarProvider } from '@/contexts/SidebarPrivader'
 
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
+
+import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -39,11 +40,11 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider session={session}>
-            <MenuProvider>
+            <SidebarProvider>
               <Sidebar />
               <Header />
               <div className="mx-auto max-w-7xl gap-6 p-6">{children}</div>
-            </MenuProvider>
+            </SidebarProvider>
           </SessionProvider>
         </ThemeProvider>
         <Analytics />
